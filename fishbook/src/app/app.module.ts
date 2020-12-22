@@ -10,6 +10,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
+import { MyProfileModule } from './my-profile/my-profile/my-profile.module';
+import { MyProfileComponent } from './my-profile/components/my-profile/my-profile.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -17,13 +20,15 @@ import { HomeModule } from './home/home.module';
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     AppRoutingModule,
     SharedModule,
     CoreModule,
-    HomeModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
+    HomeModule,
+    MyProfileModule
   ],
   providers: [],
   bootstrap: [AppComponent]
