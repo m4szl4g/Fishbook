@@ -3,10 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/components/home/home.component';
 import { MyProfileComponent } from './my-profile/components/my-profile/my-profile.component';
 import { NewFishComponent } from './new-fish/components/new-fish/new-fish.component';
+import { ProfileComponent } from './profile/components/profile/profile.component';
 
 const routes: Routes = [ 
     { path: '', component: HomeComponent },
     { path: 'my-profile', component: MyProfileComponent },
+    { path: 'profile', component: ProfileComponent },
     { path: 'new-fish', component: NewFishComponent }
 ];
 

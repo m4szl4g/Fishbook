@@ -11,9 +11,9 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { MyProfileModule } from './my-profile/my-profile/my-profile.module';
-import { MyProfileComponent } from './my-profile/components/my-profile/my-profile.component';
 import { RouterModule } from '@angular/router';
 import { NewFishModule } from './new-fish/new-fish.module';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import { NewFishModule } from './new-fish/new-fish.module';
     EffectsModule.forRoot([]),
     HomeModule,
     MyProfileModule,
+    ProfileModule,
     NewFishModule
   ],
   providers: [],
