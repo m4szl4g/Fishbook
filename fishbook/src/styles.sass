@@ -1,6 +1,8 @@
 @import 'assets/styles/fonts'
 
 $light-blue:#88CCFF
+$ligt-grey: #f1f1f1
+$medium-grey:#d7d8d9
 $error-red: #FF7575
 
 .btn
@@ -9,7 +11,7 @@ $error-red: #FF7575
     font-size: 18px
     min-width: 60px
     padding: 0 20px 0
-    font-family: RobotoMonoLight
+    font-family: RaleWayMedim
 
     &:hover
         opacity: 0.85
@@ -22,3 +24,40 @@ $error-red: #FF7575
 
 .btn--error, btn--success
     color: #FFFFFF
+
+.form-field
+    display: flex
+    flex-direction: column
+    max-width: 40%
+
+.form-field__input
+    border: 0.5px solid $medium-grey
+    margin: 7px 0 20px
+    padding: 5px
+
+    &:focus
+        outline-width: 0
+        border: 0.5px solid $light-blue
+
+.form-field__label
+    font-weight: bold
+
+.form-field__label, .form-field__input
+    font-size: 16px
+    color: black
+    font-family: RaleWayMedium
+
+::-webkit-input-placeholder
+    font-family: RaleWayLigth
+    font-style: italic
+    font-size: 14px
+
+::-webkit-input-placeholder
+    font-family: RaleWayLigth
+    font-style: italic
+    font-size: 14px
+
+::placeholder
+    font-family: RaleWayLigth
+    font-style: italic
+    font-size: 14px
