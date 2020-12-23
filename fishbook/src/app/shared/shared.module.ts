@@ -17,7 +17,7 @@ import { RouterModule } from '@angular/router';
       RouterModule
     ],  
     exports: [
-      MenuComponent,
+      MenuComponent
     ],
     providers: [],
     bootstrap: []
