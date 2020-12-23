@@ -13,6 +13,7 @@ import { HomeModule } from './home/home.module';
 import { MyProfileModule } from './my-profile/my-profile/my-profile.module';
 import { MyProfileComponent } from './my-profile/components/my-profile/my-profile.component';
 import { RouterModule } from '@angular/router';
+import { NewFishModule } from './new-fish/new-fish.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { RouterModule } from '@angular/router';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
     HomeModule,
-    MyProfileModule
+    MyProfileModule,
+    NewFishModule
   ],
   providers: [],
   bootstrap: [AppComponent]
