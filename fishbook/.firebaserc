@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "fishbook-dev"
+  },
+  "targets": {
+    "fishbook-dev": {
+      "hosting": {
+        "fishbook": [
+          "fishbook-dev"
+        ]
+      }
+    }
+  }
+}
