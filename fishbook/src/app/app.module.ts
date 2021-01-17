@@ -1,6 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 
+import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from "@angular/fire";
@@ -13,29 +12,29 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { MyProfileModule } from './my-profile/my-profile/my-profile.module';
-import { RouterModule } from '@angular/router';
 import { NewFishModule } from './new-fish/new-fish.module';
 import { ProfileModule } from './profile/profile.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
-    RouterModule,
-    AppRoutingModule,
     SharedModule,
     CoreModule,
+    AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
+
+    AuthModule,
     HomeModule,
     MyProfileModule,
     ProfileModule,
-    NewFishModule,
+    NewFishModule
   ],
   providers: [],
   bootstrap: [AppComponent]

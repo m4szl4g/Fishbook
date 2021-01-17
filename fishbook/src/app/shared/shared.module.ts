@@ -5,19 +5,27 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     declarations: [
       MenuComponent],
     imports: [
+      CommonModule,
       BrowserAnimationsModule,
       MatToolbarModule,
       MatButtonModule,
       MatIconModule,
-      RouterModule
+      RouterModule,
+      ReactiveFormsModule
     ],  
     exports: [
-      MenuComponent
+      MenuComponent,
+      ReactiveFormsModule,
+      CommonModule,
+      RouterModule,
+      BrowserAnimationsModule
     ],
     providers: [],
     bootstrap: []

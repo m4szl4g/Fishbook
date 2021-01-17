@@ -10,16 +10,15 @@ import { AppState } from 'src/app/core/store';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-
-  error$: Observable<string | null>;
+  public loginForm: FormGroup;
+  public error$: Observable<string | null>;
 
   constructor(private store: Store<AppState>) { }
 
-  ngOnInit() {
+  public ngOnInit() : void {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required)
@@ -38,25 +37,12 @@ export class LoginComponent implements OnInit {
       );
   }
 
-  get email() { return this.loginForm.get('email'); }
-  get password() { return this.loginForm.get('password'); }
+  public get email() { return this.loginForm.get('email'); }
+  public get password() { return this.loginForm.get('password'); }
 
-  onLogin() {
+  public login(): void {
     if (this.loginForm.valid) {
       this.store.dispatch(new actions.LoginRequested(this.loginForm.value));
     }
   }
-
-  onGoogleLogin(authProvider: string) {
-    this.store.dispatch(new actions.SocialLogin({ authProvider }));
-  }
-
-  onFacebookLogin(authProvider: string) {
-    this.store.dispatch(new actions.SocialLogin({ authProvider }));
-  }
-
-  onTwitterLogin(authProvider: string) {
-    this.store.dispatch(new actions.SocialLogin({ authProvider }));
-  }
-
 }
