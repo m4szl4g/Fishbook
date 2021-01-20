@@ -18,8 +18,8 @@ export class AuthEffects {
 
   @Effect()
   register$ = this.actions$.pipe(
-    ofType(auth.AuthActionTypes.REGISTER_REQUESTED),
-    map((action: auth.RegisterRequested) => action.payload),
+    ofType(auth.AuthActionTypes.REGISTER),
+    map((action: auth.Register) => action.payload),
     switchMap(payload =>
       this.authService.register(payload.email, payload.password).pipe(
         map((res: any) => {
@@ -39,8 +39,6 @@ export class AuthEffects {
           return [
             new auth.RegisterCompleted(),
             new auth.LoginSuccess({ user }),
-            new auth.UpdateProfile({ displayName: payload.username, photoUrl: user.photoUrl }),
-            new auth.SaveUser( { user })
           ];
         }),
         tap(() => { this.router.navigateByUrl(''); }),
@@ -53,8 +51,8 @@ export class AuthEffects {
 
   @Effect()
   login$ = this.actions$.pipe(
-    ofType(auth.AuthActionTypes.LOGIN_REQUESTED),
-    map((action: auth.LoginRequested) => action.payload),
+    ofType(auth.AuthActionTypes.LOGIN),
+    map((action: auth.Login) => action.payload),
     switchMap(payload =>
       this.authService.login(payload.email, payload.password).pipe(
         map((res: any) => {
@@ -76,22 +74,15 @@ export class AuthEffects {
 
   @Effect()
   loginSuccess$ = this.actions$.pipe(
-    ofType(auth.AuthActionTypes.LOGIN_SUCCESS),
-    map( (action: auth.SaveUser) => action.payload),
-    switchMap( (payload: any) => {
-        return [
-          new auth.UpdateOnlineStatus({ uid: payload.user.uid, status: true }),
-          new auth.CheckUserRole( {uid: payload.user.uid })
-        ];
-    })
+    ofType(auth.AuthActionTypes.LOGIN_SUCCESS)
   );
 
  
 
   @Effect()
   logout$ = this.actions$.pipe(
-    ofType(auth.AuthActionTypes.LOGOUT_REQUESTED),
-    map( (action: auth.LogoutRequested) => action.payload),
+    ofType(auth.AuthActionTypes.LOGOUT),
+    map( (action: auth.Logout) => action.payload),
     switchMap((payload: any) => this.authService.logout()
       .pipe(
         map(() => (new auth.LogoutCompleted())),

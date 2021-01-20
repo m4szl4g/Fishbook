@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
   public login(): void {
     if (this.loginForm.valid) {
-      this.store.dispatch(new actions.LoginRequested(this.loginForm.value));
+      this.store.dispatch(new actions.Login(this.loginForm.value));
     }
   }
 }
