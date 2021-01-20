@@ -4,22 +4,22 @@ import { Observable } from 'rxjs';
 
 import { AuthEffects } from './auth.effects';
 
-describe('AuthEffects', () => {
-  let actions$: Observable<any>;
-  let effects: AuthEffects;
+// describe('AuthEffects', () => {
+//   let actions$: Observable<any>;
+//   let effects: AuthEffects;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        AuthEffects,
-        provideMockActions(() => actions$)
-      ]
-    });
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({
+//       providers: [
+//         AuthEffects,
+//         provideMockActions(() => actions$)
+//       ]
+//     });
 
-    effects = TestBed.get(AuthEffects);
-  });
+//     effects = TestBed.get(AuthEffects);
+//   });
 
-  it('should be created', () => {
-    expect(effects).toBeTruthy();
-  });
-});
+//   it('should be created', () => {
+//     expect(effects).toBeTruthy();
+//   });
+// });
