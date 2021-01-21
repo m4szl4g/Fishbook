@@ -8,17 +8,21 @@ import { MyProfileComponent } from './my-profile/components/my-profile/my-profil
 import { NewFishComponent } from './new-fish/components/new-fish/new-fish.component';
 import { ProfileComponent } from './profile/components/profile/profile.component';
 
-const routes: Routes = [ 
-    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'my-profile', component: MyProfileComponent },
-    { path: 'profile', component: ProfileComponent },
-    { path: 'new-fish', component: NewFishComponent }
+const routes: Routes = [
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  {
+    path: 'my-profile',
+    component: MyProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'new-fish', component: NewFishComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
