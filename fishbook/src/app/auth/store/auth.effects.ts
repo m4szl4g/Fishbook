@@ -13,61 +13,55 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private router: Router,
+    private router: Router
   ) {}
 
   @Effect()
   register$ = this.actions$.pipe(
     ofType(auth.AuthActionTypes.REGISTER),
     map((action: auth.Register) => action.payload),
-    switchMap(payload =>
+    switchMap((payload) =>
       this.authService.register(payload.email, payload.password).pipe(
         map((res: any) => {
           const user = {
             uid: res.user.uid,
             displayName: payload.username || res.user.displayName,
             email: res.user.email,
-            providerId: res.additionalUserInfo.providerId,
             photoUrl: res.user.photoURL,
-            isNewUser: res.additionalUserInfo.isNewUser,
-            isAdmin: false,
-            isOnline: true
           };
           return user;
         }),
-        switchMap( (user: User) => {
+        switchMap((user: User) => {
           return [
             new auth.RegisterCompleted(),
             new auth.LoginSuccess({ user }),
           ];
         }),
-        tap(() => { this.router.navigateByUrl(''); }),
-        catchError(error => of(new auth.AuthError({ error })))
+        tap(() => {
+          this.router.navigateByUrl('');
+        }),
+        catchError((error) => of(new auth.AuthError({ error })))
       )
     )
   );
-
-
 
   @Effect()
   login$ = this.actions$.pipe(
     ofType(auth.AuthActionTypes.LOGIN),
     map((action: auth.Login) => action.payload),
-    switchMap(payload =>
+    switchMap((payload) =>
       this.authService.login(payload.email, payload.password).pipe(
         map((res: any) => {
           const user = {
             uid: res.user.uid,
             displayName: res.user.displayName,
             email: res.user.email,
-            providerId: res.additionalUserInfo.providerId,
             photoUrl: res.user.photoURL,
-            isNewUser: res.additionalUserInfo.isNewUser
           };
-          return new auth.LoginSuccess( {user });
+          return new auth.LoginSuccess({ user });
         }),
         tap(() => this.router.navigateByUrl('')),
-        catchError(error => of(new auth.AuthError({ error })))
+        catchError((error) => of(new auth.AuthError({ error })))
       )
     )
   );
@@ -77,20 +71,17 @@ export class AuthEffects {
     ofType(auth.AuthActionTypes.LOGIN_SUCCESS)
   );
 
- 
-
   @Effect()
   logout$ = this.actions$.pipe(
     ofType(auth.AuthActionTypes.LOGOUT),
-    map( (action: auth.Logout) => action.payload),
-    switchMap((payload: any) => this.authService.logout()
-      .pipe(
-        map(() => (new auth.LogoutCompleted())),
+    map((action: auth.Logout) => action.payload),
+    switchMap((payload: any) =>
+      this.authService.logout().pipe(
+        map(() => new auth.LogoutCompleted()),
         tap(() => this.router.navigateByUrl('')),
-        catchError(error => {
+        catchError((error) => {
           return of(new auth.AuthError({ error }));
-        }
-        )
+        })
       )
     )
   );
@@ -98,8 +89,8 @@ export class AuthEffects {
   @Effect()
   getUser$ = this.actions$.pipe(
     ofType(auth.AuthActionTypes.GET_USER),
-    switchMap(() => this.authService.getAuthState()
-      .pipe(
+    switchMap(() =>
+      this.authService.getAuthState().pipe(
         take(1),
         map((authData: any) => {
           if (authData) {
@@ -115,7 +106,7 @@ export class AuthEffects {
             return new auth.LoginFailed();
           }
         }),
-        catchError(error => of(new auth.AuthError({ error })))
+        catchError((error) => of(new auth.AuthError({ error })))
       )
     )
   );
