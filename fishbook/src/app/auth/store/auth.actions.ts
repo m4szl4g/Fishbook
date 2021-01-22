@@ -15,13 +15,13 @@ export enum AuthActionTypes {
 
   GET_USER = '[Auth] GET User',
 
-  AUTH_ERROR = '[Auth] Error'
+  AUTH_ERROR = '[Auth] Error',
 }
 
 export class Register implements Action {
   readonly type = AuthActionTypes.REGISTER;
 
-  constructor(public payload: { username: string, email: string; password: string }) {}
+  constructor(public payload: { email: string; password: string }) {}
 }
 
 export class RegisterCompleted implements Action {

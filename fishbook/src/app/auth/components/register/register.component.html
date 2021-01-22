@@ -1,4 +1,46 @@
-<div class="register">register...</div>
+<div class="register">
+  <h1>Register new account</h1>
+
+  <form [formGroup]="registerForm">
+    <div class="form-field">
+      <label class="form-field__label">Email</label>
+      <input
+        class="form-field__input"
+        aria-placeholder="Email..."
+        id="email"
+        formControlName="email"
+      />
+      <span class="error-message" *ngIf="email && email.invalid && email.dirty"
+        >Email is required</span
+      >
+    </div>
+    <div class="form-field">
+      <label class="form-field__label">Password</label>
+      <input
+        type="password"
+        class="form-field__input"
+        aria-placeholder="Password..."
+        id="password"
+        formControlName="password"
+      />
+      <span
+        class="error-message"
+        *ngIf="password && password.invalid && password.dirty"
+        >Password is required</span
+      >
+    </div>
+
+    <div *ngIf="error$ | async as error" class="error-message">
+      {{ error }}
+    </div>
+
+    <button class="btn btn--success" type="submit" (click)="register()">
+      Sign up
+    </button>
+  </form>
+
+  <p>Already have an account? <a routerLink="/login">Login</a></p>
+</div>
 
 <!-- <div class="container-fluid full-page-container">
   <div class="row h-100 justify-content-center align-items-center">

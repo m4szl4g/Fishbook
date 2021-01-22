@@ -25,7 +25,6 @@ export class AuthEffects {
         map((res: any) => {
           const user = {
             uid: res.user.uid,
-            displayName: payload.username || res.user.displayName,
             email: res.user.email,
             photoUrl: res.user.photoURL,
           };
