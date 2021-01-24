@@ -3,7 +3,7 @@ import { User } from '../models/user.model';
 
 export enum AuthActionTypes {
   REGISTER = '[Auth] REGISTER',
-  REGISTER_COMPLETED = '[Auth] REGISTER Completed',
+  REGISTER_SUCCESS = '[Auth] REGISTER Success',
   REGISTER_FAILED = '[Auth] REGISTER Failed',
 
   LOGIN = '[Auth] LOGIN',
@@ -11,7 +11,7 @@ export enum AuthActionTypes {
   LOGIN_FAILED = '[Auth] LOGIN Failed',
 
   LOGOUT = '[Auth] LOGOUT',
-  LOGOUT_COMPLETED = '[Auth] LOGOUT completed',
+  LOGOUT_SUCCESS = '[Auth] LOGOUT Success',
 
   GET_USER = '[Auth] GET User',
 
@@ -24,8 +24,8 @@ export class Register implements Action {
   constructor(public payload: { email: string; password: string }) {}
 }
 
-export class RegisterCompleted implements Action {
-  readonly type = AuthActionTypes.REGISTER_COMPLETED;
+export class RegisterSuccess implements Action {
+  readonly type = AuthActionTypes.REGISTER_SUCCESS;
 }
 
 export class RegisterFailed implements Action {
@@ -56,8 +56,8 @@ export class Logout implements Action {
   constructor() {}
 }
 
-export class LogoutCompleted implements Action {
-  readonly type = AuthActionTypes.LOGOUT_COMPLETED;
+export class LogoutSuccess implements Action {
+  readonly type = AuthActionTypes.LOGOUT_SUCCESS;
 }
 
 export class GetUser implements Action {
@@ -72,12 +72,12 @@ export class AuthError implements Action {
 
 export type AuthAction =
   | Register
-  | RegisterCompleted
+  | RegisterSuccess
   | RegisterFailed
   | Login
   | LoginSuccess
   | LoginFailed
   | Logout
-  | LogoutCompleted
+  | LogoutSuccess
   | GetUser
   | AuthError;

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AuthService } from '../services/auth.service';
-import { Actions } from '@ngrx/effects';
+import { Actions, ROOT_EFFECTS_INIT } from '@ngrx/effects';
 import { empty, Observable, of } from 'rxjs';
 import * as fromEffects from '../store/auth.effects';
 import * as fromActions from '../store/auth.actions';
@@ -12,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { RouterTestingModule } from '@angular/router/testing';
 import { throwError } from 'rxjs';
+import { INIT } from '@ngrx/store';
 
 export class TestActions extends Actions {
   constructor() {
@@ -123,7 +124,7 @@ describe('ProjectEffets', () => {
       expect(effects.login$).toBeObservable(expected);
     });
 
-    it('should invoke login failed after authentication failed', () => {
+    it('Login - should invoke login failed after authentication failed', () => {
       let errorMessage = 'Error XYZ';
       spyOn(service, 'login').and.returnValue(throwError(errorMessage));
       let loginPayload = { email: 'test@gmail.com', password: 'Pass123' };
@@ -136,6 +137,111 @@ describe('ProjectEffets', () => {
       const expected = cold('-b', { b: completion });
 
       expect(effects.login$).toBeObservable(expected);
+    });
+
+    it('GetUser - should invoke login failed after authentication failed', () => {
+      let errorMessage = 'Error XYZ';
+      spyOn(service, 'getAuthState').and.returnValue(throwError(errorMessage));
+      const action = new fromActions.GetUser();
+
+      let errorPayload = { error: errorMessage };
+      const completion = new fromActions.AuthError(errorPayload);
+      actions$.stream = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+
+      expect(effects.getUser$).toBeObservable(expected);
+    });
+  });
+
+  describe('register$', () => {
+    it('Register - should invoke register success', () => {
+      let nameJohn = 'johndoe';
+      let emailJohn = 'john@test.doe';
+      let photoJohn = 'url_john';
+      let idJohn = 'id_john_doe';
+
+      let userCredential: firebase.default.auth.UserCredential = {
+        credential: {
+          providerId: 'prov_id',
+          signInMethod: 'userpass',
+          toJSON: null,
+        },
+        user: {
+          displayName: nameJohn,
+          email: emailJohn,
+          photoURL: photoJohn,
+          uid: idJohn,
+          emailVerified: true,
+          isAnonymous: false,
+          phoneNumber: null,
+          metadata: null,
+          multiFactor: null,
+          providerData: null,
+          providerId: 'prov_id',
+          delete: null,
+          getIdToken: null,
+          getIdTokenResult: null,
+          linkWithCredential: null,
+          linkWithPhoneNumber: null,
+          linkWithPopup: null,
+          linkWithRedirect: null,
+          reauthenticateWithCredential: null,
+          reauthenticateWithPhoneNumber: null,
+          reauthenticateWithPopup: null,
+          reauthenticateWithRedirect: null,
+          refreshToken: null,
+          reload: null,
+          sendEmailVerification: null,
+          tenantId: null,
+          toJSON: null,
+          unlink: null,
+          updateEmail: null,
+          updatePassword: null,
+          updatePhoneNumber: null,
+          updateProfile: null,
+          verifyBeforeUpdateEmail: null,
+          linkAndRetrieveDataWithCredential: null,
+          reauthenticateAndRetrieveDataWithCredential: null,
+        },
+      };
+      spyOn(service, 'register').and.returnValue(of(userCredential));
+      const action = new fromActions.Register({
+        password: 'pass',
+        email: emailJohn,
+      });
+
+      const registerSuccess = new fromActions.RegisterSuccess();
+      let loginPayload = {
+        user: {
+          email: emailJohn,
+          photoUrl: photoJohn,
+          displayName: null,
+          uid: idJohn,
+        },
+      };
+      const loginSuccess = new fromActions.LoginSuccess(loginPayload);
+
+      actions$.stream = hot('-a', { a: action });
+      const expected = cold('-(bc)', { b: registerSuccess, c: loginSuccess });
+
+      expect(effects.register$).toBeObservable(expected);
+    });
+
+    it('Register - should invoke login failed after authentication failed', () => {
+      let errorMessage = 'Error XYZ';
+      spyOn(service, 'register').and.returnValue(throwError(errorMessage));
+      const action = new fromActions.Register({
+        password: 'pass',
+        email: 'mail@gmail.com',
+      });
+
+      let errorPayload = { error: errorMessage };
+      const completion = new fromActions.AuthError(errorPayload);
+
+      actions$.stream = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+
+      expect(effects.register$).toBeObservable(expected);
     });
   });
 });

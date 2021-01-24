@@ -26,14 +26,12 @@ export class AuthEffects {
             uid: res.user.uid,
             email: res.user.email,
             photoUrl: res.user.photoURL,
+            displayName: null,
           };
           return user;
         }),
         switchMap((user: User) => {
-          return [
-            new auth.RegisterCompleted(),
-            new auth.LoginSuccess({ user }),
-          ];
+          return [new auth.RegisterSuccess(), new auth.LoginSuccess({ user })];
         }),
         tap(() => {
           this.router.navigateByUrl('');
@@ -69,7 +67,7 @@ export class AuthEffects {
     ofType(auth.AuthActionTypes.LOGOUT),
     switchMap(() =>
       this.authService.logout().pipe(
-        map(() => new auth.LogoutCompleted()),
+        map(() => new auth.LogoutSuccess()),
         tap(() => this.router.navigateByUrl('/login')),
         catchError((error) => {
           return of(new auth.AuthError({ error }));

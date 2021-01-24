@@ -30,7 +30,7 @@ export function authReducer(
       });
     }
 
-    case AuthActionTypes.LOGOUT_COMPLETED: {
+    case AuthActionTypes.LOGOUT_SUCCESS: {
       return Object.assign({}, state, {
         user: null,
         isLoading: false,
