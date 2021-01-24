@@ -53,7 +53,7 @@ export class LoginFailed implements Action {
 export class Logout implements Action {
   readonly type = AuthActionTypes.LOGOUT;
 
-  constructor(public payload: { user: User }) {}
+  constructor() {}
 }
 
 export class LogoutCompleted implements Action {

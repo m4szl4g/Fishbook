@@ -7,5 +7,9 @@
     <a class="toolbar__link" routerLink="/my-profile" routerLinkActive="active"
       >My profile</a
     >
+    <ng-container *ngIf="user$ | async as user">
+      {{ user.displayName }}
+      <a class="toolbar__link" (click)="logout()">Logout</a>
+    </ng-container>
   </nav>
 </mat-toolbar>

@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { Observable, of, defer } from 'rxjs';
-import { map, switchMap, catchError, tap, take } from 'rxjs/operators';
-
+import { defer, Observable, of } from 'rxjs';
+import { map, switchMap, catchError, tap } from 'rxjs/operators';
 import * as auth from './../store/auth.actions';
 import { User } from '../models/user.model';
 
@@ -59,25 +58,19 @@ export class AuthEffects {
           };
           return new auth.LoginSuccess({ user });
         }),
-        tap(() => this.router.navigateByUrl('')),
+        tap(() => this.router.navigateByUrl('/')),
         catchError((error) => of(new auth.AuthError({ error })))
       )
     )
   );
 
   @Effect()
-  loginSuccess$ = this.actions$.pipe(
-    ofType(auth.AuthActionTypes.LOGIN_SUCCESS)
-  );
-
-  @Effect()
   logout$ = this.actions$.pipe(
     ofType(auth.AuthActionTypes.LOGOUT),
-    map((action: auth.Logout) => action.payload),
-    switchMap((payload: any) =>
+    switchMap(() =>
       this.authService.logout().pipe(
         map(() => new auth.LogoutCompleted()),
-        tap(() => this.router.navigateByUrl('')),
+        tap(() => this.router.navigateByUrl('/login')),
         catchError((error) => {
           return of(new auth.AuthError({ error }));
         })
@@ -90,7 +83,6 @@ export class AuthEffects {
     ofType(auth.AuthActionTypes.GET_USER),
     switchMap(() =>
       this.authService.getAuthState().pipe(
-        take(1),
         map((authData: any) => {
           if (authData) {
             const user = {
