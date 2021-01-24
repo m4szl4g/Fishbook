@@ -20,7 +20,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
+    - run: dir  
     - run: npm install -g @angular/cli
     - run: cd fishbook
+    - run: dir  
     - run: ng build
     - run: ng test
