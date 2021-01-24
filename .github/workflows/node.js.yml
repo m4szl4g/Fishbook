@@ -21,6 +21,6 @@ jobs:
       with:
         node-version: 12.x
     - run: dir  
-    - run: npm ci
+    - run: npm i https://github.com/m4szl4g/Fishbook
     - run: npm run build --if-present
     - run: npm test
