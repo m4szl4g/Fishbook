@@ -28,7 +28,7 @@ export function getActions() {
   return new TestActions();
 }
 
-describe('ProjectEffets', () => {
+describe('Auth Effets', () => {
   let actions$: TestActions;
   let service: AuthService;
   let effects: fromEffects.AuthEffects;
