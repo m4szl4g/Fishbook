@@ -17,25 +17,29 @@ export function authReducer(
     }
 
     case AuthActionTypes.LOGIN_FAILED: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         user: null,
         isLoading: false,
         isLoggedIn: false,
-      });
+      };
     }
 
     case AuthActionTypes.AUTH_ERROR: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
+        isLoading: false,
         error: action.payload.error,
-      });
+      };
     }
 
     case AuthActionTypes.LOGOUT_SUCCESS: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         user: null,
         isLoading: false,
         isLoggedIn: false,
-      });
+      };
     }
 
     default:

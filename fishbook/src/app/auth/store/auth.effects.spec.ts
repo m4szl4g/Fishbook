@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AuthService } from '../services/auth.service';
-import { Actions, ROOT_EFFECTS_INIT } from '@ngrx/effects';
+import { Actions } from '@ngrx/effects';
 import { empty, Observable, of } from 'rxjs';
 import * as fromEffects from '../store/auth.effects';
 import * as fromActions from '../store/auth.actions';
@@ -12,7 +12,6 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { RouterTestingModule } from '@angular/router/testing';
 import { throwError } from 'rxjs';
-import { INIT } from '@ngrx/store';
 
 export class TestActions extends Actions {
   constructor() {
@@ -138,6 +137,69 @@ describe('Auth Effets', () => {
 
       expect(effects.login$).toBeObservable(expected);
     });
+  });
+
+  describe('getUser$', () => {
+    it('GetUser - should invoke login success action', () => {
+      const johnName = 'johndoe',
+        johnEmail = 'john@email.com',
+        johnPhotoUrl = 'photo_url',
+        johnId = 'ID_John_123';
+      let user: firebase.default.User = {
+        displayName: johnName,
+        email: johnEmail,
+        photoURL: johnPhotoUrl,
+        uid: johnId,
+        emailVerified: true,
+        isAnonymous: false,
+        phoneNumber: null,
+        metadata: null,
+        multiFactor: null,
+        providerData: null,
+        providerId: 'prov_id',
+        delete: null,
+        getIdToken: null,
+        getIdTokenResult: null,
+        linkWithCredential: null,
+        linkWithPhoneNumber: null,
+        linkWithPopup: null,
+        linkWithRedirect: null,
+        reauthenticateWithCredential: null,
+        reauthenticateWithPhoneNumber: null,
+        reauthenticateWithPopup: null,
+        reauthenticateWithRedirect: null,
+        refreshToken: null,
+        reload: null,
+        sendEmailVerification: null,
+        tenantId: null,
+        toJSON: null,
+        unlink: null,
+        updateEmail: null,
+        updatePassword: null,
+        updatePhoneNumber: null,
+        updateProfile: null,
+        verifyBeforeUpdateEmail: null,
+        linkAndRetrieveDataWithCredential: null,
+        reauthenticateAndRetrieveDataWithCredential: null,
+      };
+      spyOn(service, 'getAuthState').and.returnValue(of(user));
+
+      let payloadLogin = {
+        user: {
+          uid: johnId,
+          displayName: johnName,
+          email: johnEmail,
+          photoUrl: johnPhotoUrl,
+        },
+      };
+
+      actions$.stream = hot('-a', { a: new fromActions.GetUser() });
+      const expected = cold('-b', {
+        b: new fromActions.LoginSuccess(payloadLogin),
+      });
+
+      expect(effects.getUser$).toBeObservable(expected);
+    });
 
     it('GetUser - should invoke login failed after authentication failed', () => {
       let errorMessage = 'Error XYZ';
@@ -242,6 +304,17 @@ describe('Auth Effets', () => {
       const expected = cold('-b', { b: completion });
 
       expect(effects.register$).toBeObservable(expected);
+    });
+  });
+
+  describe('logout$', () => {
+    it('Logout - Invoked logout success', () => {
+      spyOn(service, 'logout').and.returnValue(of(void 0));
+
+      actions$.stream = hot('-a', { a: new fromActions.Logout() });
+      const expected = cold('-b', { b: new fromActions.LogoutSuccess() });
+
+      expect(effects.logout$).toBeObservable(expected);
     });
   });
 });

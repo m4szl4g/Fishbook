@@ -87,7 +87,6 @@ export class AuthEffects {
               uid: authData.uid,
               displayName: authData.displayName,
               email: authData.email,
-              providerId: authData.providerData[0].providerId,
               photoUrl: authData.photoURL,
             };
             return new auth.LoginSuccess({ user });
