@@ -3,19 +3,23 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { from, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  constructor(private afAuth: AngularFireAuth) { }
+  constructor(private afAuth: AngularFireAuth) {}
 
-  public register(email: string, password: string) 
-    : Observable<firebase.default.auth.UserCredential> {
-      return from(this.afAuth.createUserWithEmailAndPassword(email, password));
+  public register(
+    email: string,
+    password: string
+  ): Observable<firebase.default.auth.UserCredential> {
+    return from(this.afAuth.createUserWithEmailAndPassword(email, password));
   }
 
-  public login(email: string, password: string) 
-    : Observable<firebase.default.auth.UserCredential> {
-      return from(this.afAuth.signInWithEmailAndPassword(email, password));
+  public login(
+    email: string,
+    password: string
+  ): Observable<firebase.default.auth.UserCredential> {
+    return from(this.afAuth.signInWithEmailAndPassword(email, password));
   }
 
   public logout(): Observable<void> {
@@ -26,7 +30,7 @@ export class AuthService {
     return this.afAuth.authState;
   }
 
-  public getCurrentUser() : Promise<firebase.default.User> {
+  public getCurrentUser(): Promise<firebase.default.User> {
     return this.afAuth.currentUser;
   }
 }
