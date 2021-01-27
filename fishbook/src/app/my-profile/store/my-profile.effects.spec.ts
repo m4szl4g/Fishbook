@@ -1,17 +1,21 @@
-import { TestBed } from '@angular/core/testing';
-import { MyProfileService } from '../services/my-profile.service';
-import { Actions } from '@ngrx/effects';
-import { empty, Observable, of, throwError } from 'rxjs';
-import * as fromEffects from '../store/my-profile.effects';
-import * as fromActions from '../store/my-profile.actions';
-import * as fromReducers from '../store/my-profile.reducer';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { hot, cold } from 'jasmine-marbles';
-import { StoreModule } from '@ngrx/store';
+import { TestBed } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
-import { environment } from 'src/environments/environment';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Actions } from '@ngrx/effects';
+import { MemoizedSelector, StoreModule } from '@ngrx/store';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { cold, hot } from 'jasmine-marbles';
+import { empty, Observable, of, throwError } from 'rxjs';
+import { User } from 'src/app/auth/models/user.model';
+import { environment } from 'src/environments/environment';
+import * as fromAuthSelectors from '../../auth/store/auth.selectors';
+import * as fromAuthState from '../../auth/store/auth.state';
 import { MyProfile } from '../models/my-profile.model';
+import { MyProfileService } from '../services/my-profile.service';
+import * as fromActions from '../store/my-profile.actions';
+import * as fromEffects from '../store/my-profile.effects';
+import * as fromReducers from '../store/my-profile.reducer';
 
 export class TestActions extends Actions {
   constructor() {
@@ -31,6 +35,8 @@ describe('My Profile Effets', () => {
   let actions$: TestActions;
   let service: MyProfileService;
   let effects: fromEffects.MyProfileEffects;
+  let store: MockStore;
+  let userFromStore: MemoizedSelector<fromAuthState.AuthState, User>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -43,13 +49,23 @@ describe('My Profile Effets', () => {
       providers: [
         MyProfileService,
         fromEffects.MyProfileEffects,
+        provideMockStore({}),
         { provide: Actions, useFactory: getActions },
       ],
     });
 
     actions$ = TestBed.get(Actions);
-    service = TestBed.get(MyProfileService);
-    effects = TestBed.get(fromEffects.MyProfileEffects);
+    service = TestBed.inject(MyProfileService);
+    effects = TestBed.inject(fromEffects.MyProfileEffects);
+    store = TestBed.inject(MockStore);
+
+    const user: User = {
+      email: 'mail@mail.mail',
+      photoUrl: 'photoUrl',
+      uid: 'uid_of_john_doe',
+      displayName: 'John Doe',
+    };
+    userFromStore = store.overrideSelector(fromAuthSelectors.getUser, user);
   });
 
   describe('get$', () => {

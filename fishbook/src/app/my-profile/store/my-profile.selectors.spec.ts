@@ -1,12 +1,9 @@
-import { StoreModule, Store } from '@ngrx/store';
 import { TestBed } from '@angular/core/testing';
-
-import { MyProfile } from '../models/my-profile.model';
-
-import * as fromReducers from './my-profile.reducer';
-import * as fromActions from './my-profile.actions';
-import * as fromSelectors from './my-profile.selectors';
+import { Store, StoreModule } from '@ngrx/store';
 import * as fromState from '../../core/store';
+import { MyProfile } from '../models/my-profile.model';
+import * as fromReducers from './my-profile.reducer';
+import * as fromSelectors from './my-profile.selectors';
 
 describe('My Profile Selectors', () => {
   let store: Store<fromState.AppState>;

@@ -10,10 +10,11 @@ import { MyProfile } from '../models/my-profile.model';
 export class MyProfileService {
   constructor(private firestore: AngularFirestore) {}
 
-  public get(): Observable<MyProfile> {
+  public get(userId: string): Observable<MyProfile> {
+    console.log(userId, 'USERID');
     return this.firestore
       .collection('users')
-      .doc<MyProfile>('irzqMeItupaL2ecc242L3hCMKAe2')
+      .doc<MyProfile>(userId)
       .snapshotChanges()
       .pipe(
         map((doc) => {

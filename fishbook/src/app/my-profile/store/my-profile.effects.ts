@@ -1,25 +1,37 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { MyProfileService } from '../services/my-profile.service';
 import { Router } from '@angular/router';
-import { map, switchMap, catchError, tap, mergeMap } from 'rxjs/operators';
-import * as myProfileActions from './../store/my-profile.actions';
-import { MyProfile } from '../models/my-profile.model';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
+import {
+  catchError,
+  map,
+  switchMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
+import { User } from 'src/app/auth/models/user.model';
+import { MyProfile } from '../models/my-profile.model';
+import { MyProfileService } from '../services/my-profile.service';
+import * as authSelectors from './../../auth/store/auth.selectors';
+import * as myProfileActions from './../store/my-profile.actions';
 
 @Injectable()
 export class MyProfileEffects {
   constructor(
     private actions$: Actions,
     private myProfileService: MyProfileService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   @Effect()
   get$ = this.actions$.pipe(
     ofType(myProfileActions.MyProfileActionTypes.GET),
-    switchMap(() =>
-      this.myProfileService.get().pipe(
+    withLatestFrom(this.store.select(authSelectors.getUser)),
+    switchMap(([empty, user]: [void, User]) => {
+      console.log(user);
+      return this.myProfileService.get(user.uid).pipe(
         map((profile: MyProfile) => {
           return new myProfileActions.GetSuccess({ myProfile: profile });
         }),
@@ -27,7 +39,7 @@ export class MyProfileEffects {
           this.router.navigateByUrl('my-profile');
         }),
         catchError((error) => of(new myProfileActions.GetFailed({ error })))
-      )
-    )
+      );
+    })
   );
 }
