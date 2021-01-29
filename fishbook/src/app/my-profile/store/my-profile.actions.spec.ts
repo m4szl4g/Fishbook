@@ -1,4 +1,4 @@
-import { MyProfile } from '../models/my-profile.model';
+import { MyProfile } from '../../shared/models/my-profile.model';
 import * as fromMyProfileActions from './my-profile.actions';
 
 describe('My Profile Actions', () => {

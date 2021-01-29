@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { defer, Observable, of } from 'rxjs';
 import { map, switchMap, catchError, tap } from 'rxjs/operators';
 import * as auth from './../store/auth.actions';
+import * as myProfile from './../../my-profile/store/my-profile.actions';
 import { User } from '../models/user.model';
 
 @Injectable()
@@ -31,7 +32,10 @@ export class AuthEffects {
           return user;
         }),
         switchMap((user: User) => {
-          return [new auth.RegisterSuccess(), new auth.LoginSuccess({ user })];
+          return [
+            new auth.RegisterSuccess(),
+            new myProfile.Create({ user: user }),
+          ];
         }),
         tap(() => {
           this.router.navigateByUrl('');

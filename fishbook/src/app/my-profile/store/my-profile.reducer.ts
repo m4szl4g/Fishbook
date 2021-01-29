@@ -29,6 +29,13 @@ export function myProfileReducer(
       };
     }
 
+    case MyProfileActionTypes.CREATE_FAILED: {
+      return {
+        ...state,
+        hasProfile: false,
+      };
+    }
+
     default:
       return state;
   }

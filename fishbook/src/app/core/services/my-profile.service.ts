@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MyProfile } from '../models/my-profile.model';
+import { User } from 'src/app/auth/models/user.model';
+import { MyProfile } from '../../shared/models/my-profile.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MyProfileService {
+  private userCollection = 'users';
+
   constructor(private firestore: AngularFirestore) {}
 
   public get(userId: string): Observable<MyProfile> {
     console.log(userId, 'USERID');
     return this.firestore
-      .collection('users')
+      .collection(this.userCollection)
       .doc<MyProfile>(userId)
       .snapshotChanges()
       .pipe(
@@ -22,5 +25,17 @@ export class MyProfileService {
           return mappedObject;
         })
       );
+  }
+
+  public create(user: User): Observable<void> {
+    return from(
+      this.firestore
+        .collection(this.userCollection)
+        .doc(user.uid)
+        .set({
+          firstName: user.displayName ?? null,
+          lastName: user.displayName ?? null,
+        })
+    );
   }
 }

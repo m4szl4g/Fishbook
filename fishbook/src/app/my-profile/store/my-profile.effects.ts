@@ -11,8 +11,8 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 import { User } from 'src/app/auth/models/user.model';
-import { MyProfile } from '../models/my-profile.model';
-import { MyProfileService } from '../services/my-profile.service';
+import { MyProfile } from '../../shared/models/my-profile.model';
+import { MyProfileService } from '../../core/services/my-profile.service';
 import * as authSelectors from './../../auth/store/auth.selectors';
 import * as myProfileActions from './../store/my-profile.actions';
 
@@ -30,7 +30,6 @@ export class MyProfileEffects {
     ofType(myProfileActions.MyProfileActionTypes.GET),
     withLatestFrom(this.store.select(authSelectors.getUser)),
     switchMap(([empty, user]: [void, User]) => {
-      console.log(user);
       return this.myProfileService.get(user.uid).pipe(
         map((profile: MyProfile) => {
           return new myProfileActions.GetSuccess({ myProfile: profile });
@@ -39,6 +38,20 @@ export class MyProfileEffects {
           this.router.navigateByUrl('my-profile');
         }),
         catchError((error) => of(new myProfileActions.GetFailed({ error })))
+      );
+    })
+  );
+
+  @Effect()
+  createProfile$ = this.actions$.pipe(
+    ofType(myProfileActions.MyProfileActionTypes.CREATE),
+    switchMap((user: User) => {
+      return this.myProfileService.create(user).pipe(
+        map(() => new myProfileActions.CreateSuccess()),
+        tap(() => {
+          this.router.navigateByUrl('login');
+        }),
+        catchError((error) => of(new myProfileActions.CreateFailed({ error })))
       );
     })
   );

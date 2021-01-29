@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import * as fromState from '../../core/store';
-import { MyProfile } from '../models/my-profile.model';
+import { MyProfile } from '../../shared/models/my-profile.model';
 import * as fromReducers from './my-profile.reducer';
 import * as fromSelectors from './my-profile.selectors';
 

@@ -1,7 +1,7 @@
 import * as fromReducer from './my-profile.reducer';
 import * as fromActions from './my-profile.actions';
 import { myProfileInitialState } from './my-profile.state';
-import { MyProfile } from '../models/my-profile.model';
+import { MyProfile } from '../../shared/models/my-profile.model';
 
 describe('My Profile reducers', () => {
   it('no action should return default state', () => {

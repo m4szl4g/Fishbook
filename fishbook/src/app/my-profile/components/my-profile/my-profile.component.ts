@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { MyProfile } from '../../models/my-profile.model';
+import { MyProfile } from '../../../shared/models/my-profile.model';
 import * as myProfileActions from '../../store/my-profile.actions';
 import * as myProfileSelectors from '../../store/my-profile.selectors';
 

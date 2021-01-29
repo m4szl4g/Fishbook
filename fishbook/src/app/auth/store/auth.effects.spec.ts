@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 import { Actions } from '@ngrx/effects';
 import { empty, Observable, of } from 'rxjs';
 import * as fromEffects from '../store/auth.effects';
 import * as fromActions from '../store/auth.actions';
 import * as fromReducers from '../store/auth.reducer';
+import * as fromMyProfileActions from '../../my-profile/store/my-profile.actions';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { hot, cold } from 'jasmine-marbles';
 import { StoreModule } from '@ngrx/store';
@@ -273,7 +274,7 @@ describe('Auth Effets', () => {
       });
 
       const registerSuccess = new fromActions.RegisterSuccess();
-      let loginPayload = {
+      let userPayload = {
         user: {
           email: emailJohn,
           photoUrl: photoJohn,
@@ -281,10 +282,10 @@ describe('Auth Effets', () => {
           uid: idJohn,
         },
       };
-      const loginSuccess = new fromActions.LoginSuccess(loginPayload);
+      const userCreate = new fromMyProfileActions.Create(userPayload);
 
       actions$.stream = hot('-a', { a: action });
-      const expected = cold('-(bc)', { b: registerSuccess, c: loginSuccess });
+      const expected = cold('-(bc)', { b: registerSuccess, c: userCreate });
 
       expect(effects.register$).toBeObservable(expected);
     });
