@@ -32,6 +32,7 @@ export function myProfileReducer(
     case MyProfileActionTypes.CREATE_FAILED: {
       return {
         ...state,
+        error: action.payload.error,
         hasProfile: false,
       };
     }

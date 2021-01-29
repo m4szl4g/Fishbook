@@ -94,4 +94,44 @@ describe('My Profile Effets', () => {
       expect(effects.get$).toBeObservable(expected);
     });
   });
+
+  describe('create$', () => {
+    it('should invoke create success', () => {
+      spyOn(service, 'create').and.returnValue(of(void 0));
+      const user: User = {
+        email: 'john@doe.test',
+        uid: 'id_john',
+        photoUrl: 'photo_url',
+      };
+      const userPayload = { user: user };
+
+      actions$.stream = hot('-a', { a: new fromActions.Create(userPayload) });
+
+      const expected = cold('-b', {
+        b: new fromActions.CreateSuccess(),
+      });
+
+      expect(effects.create$).toBeObservable(expected);
+    });
+
+    it('should invoke create failed', () => {
+      const errorMessage = 'HTTP 500';
+      spyOn(service, 'create').and.returnValue(throwError(errorMessage));
+      const user: User = {
+        email: 'john@doe.test',
+        uid: 'id_john',
+        photoUrl: 'photo_url',
+      };
+      const userPayload = { user: user };
+
+      actions$.stream = hot('-a', {
+        a: new fromActions.Create(userPayload),
+      });
+      const expected = cold('-b', {
+        b: new fromActions.CreateFailed({ error: errorMessage }),
+      });
+
+      expect(effects.create$).toBeObservable(expected);
+    });
+  });
 });

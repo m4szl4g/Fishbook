@@ -43,11 +43,13 @@ export class MyProfileEffects {
   );
 
   @Effect()
-  createProfile$ = this.actions$.pipe(
+  create$ = this.actions$.pipe(
     ofType(myProfileActions.MyProfileActionTypes.CREATE),
     switchMap((user: User) => {
       return this.myProfileService.create(user).pipe(
-        map(() => new myProfileActions.CreateSuccess()),
+        map(() => {
+          return new myProfileActions.CreateSuccess();
+        }),
         tap(() => {
           this.router.navigateByUrl('login');
         }),

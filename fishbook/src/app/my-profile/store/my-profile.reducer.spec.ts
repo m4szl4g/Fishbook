@@ -40,4 +40,16 @@ describe('My Profile reducers', () => {
       expect(myProfile).toBe(state.myProfile);
     });
   });
+
+  describe('Create reducers', () => {
+    it('Create Failed -> set error flag and no profile', () => {
+      const errorPayload = { error: 'error....' };
+      const action = new fromActions.CreateFailed(errorPayload);
+
+      const state = fromReducer.myProfileReducer(myProfileInitialState, action);
+
+      expect(errorPayload.error).toBe(state.error);
+      expect(false).toBe(state.hasProfile);
+    });
+  });
 });
