@@ -4,6 +4,7 @@ import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { HomeComponent } from './home/components/home/home.component';
+import { EquipmentComponent } from './my-profile/components/equipment/equipment.component';
 import { MyProfileComponent } from './my-profile/components/my-profile/my-profile.component';
 import { NewFishComponent } from './new-fish/components/new-fish/new-fish.component';
 import { ProfileComponent } from './profile/components/profile/profile.component';
@@ -19,6 +20,11 @@ const routes: Routes = [
   },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'new-fish', component: NewFishComponent, canActivate: [AuthGuard] },
+  {
+    path: 'equipments',
+    component: EquipmentComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

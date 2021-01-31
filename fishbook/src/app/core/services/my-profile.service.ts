@@ -14,7 +14,6 @@ export class MyProfileService {
   constructor(private firestore: AngularFirestore) {}
 
   public get(userId: string): Observable<MyProfile> {
-    console.log(userId, 'USERID');
     return this.firestore
       .collection(this.userCollection)
       .doc<MyProfile>(userId)
@@ -36,6 +35,15 @@ export class MyProfileService {
           firstName: user.displayName ?? null,
           lastName: user.displayName ?? null,
         })
+    );
+  }
+
+  public update(profile: MyProfile): Observable<void> {
+    return from(
+      this.firestore
+        .collection(this.userCollection)
+        .doc('fix_id_should_replace')
+        .update(profile)
     );
   }
 }

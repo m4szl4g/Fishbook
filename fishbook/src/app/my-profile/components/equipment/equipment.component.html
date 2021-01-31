@@ -1,0 +1,20 @@
+<div class="equipment">
+  <h2>Equipment</h2>
+  <div class="equipment__list">
+    <div class="equipment-item" *ngFor="let equipment of equipments">
+      <h4>Equipment name</h4>
+      <div>
+        <span>Rod:</span>
+        <span>{{ equipment.rod }}</span>
+      </div>
+      <div>
+        <span>Reel:</span>
+        <span>{{ equipment.reel }}</span>
+      </div>
+      <div>
+        <span>Line:</span>
+        <span>{{ equipment.line }}</span>
+      </div>
+    </div>
+  </div>
+</div>
