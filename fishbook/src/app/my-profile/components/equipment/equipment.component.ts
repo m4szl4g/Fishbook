@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Equipment } from 'src/app/shared/models/equipment.model';
 
 @Component({
-  selector: 'app-equipment',
+  selector: 'equipment',
   templateUrl: './equipment.component.html',
   styleUrls: ['./equipment.component.sass'],
 })
 export class EquipmentComponent implements OnInit {
+  
+  @Input()
   public equipments: Equipment[] = [
     {
       rod: 'Shimano Beast Master 270',

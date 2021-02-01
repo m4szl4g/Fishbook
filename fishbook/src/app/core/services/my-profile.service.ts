@@ -20,7 +20,11 @@ export class MyProfileService {
       .snapshotChanges()
       .pipe(
         map((doc) => {
-          let mappedObject: MyProfile = { name: doc.payload.get('name') };
+          let mappedObject: MyProfile = {
+            firstName: doc.payload.get('firstName'),
+            lastName: doc.payload.get('lastName'),
+            aboutMe: doc.payload.get('aboutMe'),
+          };
           return mappedObject;
         })
       );
@@ -38,12 +42,13 @@ export class MyProfileService {
     );
   }
 
-  public update(profile: MyProfile): Observable<void> {
+  public update(profile: MyProfile, user: User): Observable<void> {
     return from(
-      this.firestore
-        .collection(this.userCollection)
-        .doc('fix_id_should_replace')
-        .update(profile)
+      this.firestore.collection(this.userCollection).doc(user.uid).update({
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        aboutMe: profile.aboutMe,
+      })
     );
   }
 }

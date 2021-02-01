@@ -10,6 +10,10 @@ export enum MyProfileActionTypes {
   CREATE = '[MyProfile] Create',
   CREATE_FAILED = '[MyProfile] Create Failed',
   CREATE_SUCCESS = '[MyProfile] Create Success',
+
+  UPDATE = '[MyProfile] Update',
+  UPDATE_FAILED = '[MyProfile] Update Failed',
+  UPDATE_SUCCESS = '[MyProfile] Update Success',
 }
 
 export class Get implements Action {
@@ -48,10 +52,31 @@ export class CreateSuccess implements Action {
   constructor() {}
 }
 
+export class Update implements Action {
+  readonly type = MyProfileActionTypes.UPDATE;
+
+  constructor(public payload: MyProfile) {}
+}
+
+export class UpdateSuccess implements Action {
+  readonly type = MyProfileActionTypes.UPDATE_SUCCESS;
+
+  constructor(public payload: { myProfile: MyProfile }) {}
+}
+
+export class UpdateFailed implements Action {
+  readonly type = MyProfileActionTypes.UPDATE_FAILED;
+
+  constructor(public payload: { error: string }) {}
+}
+
 export type MyProfileAction =
   | Get
   | GetSuccess
   | GetFailed
   | Create
   | CreateFailed
-  | CreateSuccess;
+  | CreateSuccess
+  | Update
+  | UpdateFailed
+  | UpdateSuccess;

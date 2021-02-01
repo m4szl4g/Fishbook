@@ -1,0 +1,10 @@
+<div class="my-profile">
+  <ng-container *ngIf="myProfile$ | async as myProfile">
+    <h1>My Profile</h1>
+    <user-info
+      [myProfile]="myProfile"
+      (updateProfile)="onProfileUpdated($event)"
+    ></user-info>
+    <equipment></equipment>
+  </ng-container>
+</div>

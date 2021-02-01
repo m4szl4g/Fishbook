@@ -1,3 +1,5 @@
 export interface MyProfile {
-  name: string;
+  lastName: string;
+  firstName: string;
+  aboutMe: string;
 }

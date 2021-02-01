@@ -37,6 +37,28 @@ export function myProfileReducer(
       };
     }
 
+    case MyProfileActionTypes.UPDATE: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
+    case MyProfileActionTypes.UPDATE_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }
+
+    case MyProfileActionTypes.UPDATE_FAILED: {
+      return {
+        ...state,
+        error: action.payload.error,
+        isLoading: false,
+      };
+    }
+
     default:
       return state;
   }

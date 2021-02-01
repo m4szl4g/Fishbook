@@ -57,4 +57,24 @@ export class MyProfileEffects {
       );
     })
   );
+
+  @Effect()
+  update$ = this.actions$.pipe(
+    ofType(myProfileActions.MyProfileActionTypes.UPDATE),
+    map((action: myProfileActions.Update) => action.payload),
+    withLatestFrom(this.store.select(authSelectors.getUser)),
+    switchMap(([profile, user]: [MyProfile, User]) => {
+      console.log('test', profile);
+      return this.myProfileService.update(profile, user).pipe(
+        map(() => {
+          return new myProfileActions.UpdateSuccess({ myProfile: profile });
+        }),
+        tap(() => {
+          this.router.navigateByUrl('my-profile');
+        }),
+        catchError((error) => of(new myProfileActions.UpdateFailed({ error })))
+      );
+    }),
+    catchError((error) => of(new myProfileActions.UpdateFailed({ error })))
+  );
 }
