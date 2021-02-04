@@ -1,5 +1,11 @@
 <div class="equipment">
-  <h2>Equipment</h2>
+  <div class="equipment__header">
+    <h2>Equipment</h2>
+    <a routerLink="/equipment/new"
+      ><button class="btn btn--success btn--small">+</button></a
+    >
+  </div>
+
   <div class="equipment__list">
     <div class="equipment-item" *ngFor="let equipment of data">
       <h4>{{ equipment.name }}</h4>

@@ -1,16 +1,23 @@
-.equipment
-    margin-top: 30px
-
-    .equipment, .equipment__list, .equipment__item
-        display: flex
+h4
+    display: flex
+    justify-content: center
+    font-weight: bold
 
 h2
-    justify-content: center
+    margin-right: 5px
+
+.equipment, .equipment__list, .equipment__item
     display: flex
 
 .equipment
+    margin-top: 30px
     flex-direction: column
     align-items: center
+    justify-content: center
+
+.equipment__header
+    display: flex
+    flex-direction: row
     justify-content: center
 
 .equipment__list
@@ -23,7 +30,6 @@ h2
     background-color: #F8F5FE
     border-radius: 20px
     box-shadow: 3px 4px 10px #e0dee3
-    //box-shadow: 5px 10px 18px #3f51b5
     flex-direction: column
 
 .equipment-item__element
@@ -35,8 +41,3 @@ h2
 
 .equipment-item__value
     font-style: italic
-
-h4
-    display: flex
-    justify-content: center
-    font-weight: bold
