@@ -1,0 +1,63 @@
+<div class="new-equipment">
+  <h1>Set your equipment</h1>
+  <form [formGroup]="newEquipmentForm">
+    <div class="form-field">
+      <label class="form-field__label" for="rod">Rod</label>
+      <input
+        id="rod"
+        formControlName="rod"
+        class="form-field__input"
+        aria-placeholder="Set your rod..."
+      />
+      <small class="error-message" *ngIf="rod.errors?.required && rod.touched">
+        This field is required.
+      </small>
+      <small class="error-message" *ngIf="rod.errors?.maxlength">
+        The field is longer than 30 characters
+      </small>
+    </div>
+    <div class="form-field">
+      <label class="form-field__label" for="reel">Reel</label>
+      <input
+        id="reel"
+        formControlName="reel"
+        class="form-field__input"
+        aria-placeholder="Set your reel..."
+      />
+      <small
+        class="error-message"
+        *ngIf="reel.errors?.required && reel.touched"
+      >
+        This field is required.
+      </small>
+      <small class="error-message" *ngIf="reel.errors?.maxlength">
+        The field is longer than 30 characters
+      </small>
+    </div>
+    <div class="form-field">
+      <label class="form-field__label" for="line">Line</label>
+      <input
+        id="line"
+        formControlName="line"
+        class="form-field__input"
+        aria-placeholder="Set your line..."
+      />
+      <small
+        class="error-message"
+        *ngIf="line.errors?.required && line.touched"
+      >
+        This field is required.
+      </small>
+      <small class="error-message" *ngIf="line.errors?.maxlength">
+        The field is longer than 30 characters
+      </small>
+    </div>
+    <button
+      class="btn btn--success"
+      [disabled]="newEquipmentForm.invalid"
+      (click)="create()"
+    >
+      Create
+    </button>
+  </form>
+</div>
