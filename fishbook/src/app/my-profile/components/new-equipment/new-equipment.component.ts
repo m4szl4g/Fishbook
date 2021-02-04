@@ -16,6 +16,10 @@ export class NewEquipmentComponent implements OnInit {
 
   public ngOnInit(): void {
     this.newEquipmentForm = new FormGroup({
+      name: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(30),
+      ]),
       rod: new FormControl('', [Validators.required, Validators.maxLength(30)]),
       reel: new FormControl('', [
         Validators.required,
@@ -26,6 +30,10 @@ export class NewEquipmentComponent implements OnInit {
         Validators.maxLength(30),
       ]),
     });
+  }
+
+  get name() {
+    return this.newEquipmentForm.get('name');
   }
 
   get rod() {
@@ -42,7 +50,8 @@ export class NewEquipmentComponent implements OnInit {
 
   public create(): void {
     const equipment: Equipment = {
-      rod: this.line.value,
+      name: this.name.value,
+      rod: this.rod.value,
       reel: this.reel.value,
       line: this.line.value,
     };

@@ -1,8 +1,8 @@
 <div class="equipment">
   <h2>Equipment</h2>
   <div class="equipment__list">
-    <div class="equipment-item" *ngFor="let equipment of equipments">
-      <h4>Equipment name</h4>
+    <div class="equipment-item" *ngFor="let equipment of data">
+      <h4>{{ equipment.name }}</h4>
       <div>
         <span>Rod:</span>
         <span>{{ equipment.rod }}</span>

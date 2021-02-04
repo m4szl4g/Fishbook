@@ -59,6 +59,13 @@ export function myProfileReducer(
       };
     }
 
+    case MyProfileActionTypes.GET_EQUIPMENT_SUCCESS: {
+      return {
+        ...state,
+        equipments: action.payload,
+      };
+    }
+
     default:
       return state;
   }

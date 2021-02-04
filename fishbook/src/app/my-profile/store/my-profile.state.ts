@@ -1,3 +1,4 @@
+import { Equipment } from 'src/app/shared/models/equipment.model';
 import { MyProfile } from '../../shared/models/my-profile.model';
 
 export interface MyProfileState {
@@ -5,6 +6,7 @@ export interface MyProfileState {
   isLoading: boolean;
   error: string;
   hasProfile: boolean;
+  equipments: Equipment[];
 }
 
 export const myProfileInitialState: MyProfileState = {
@@ -12,4 +14,5 @@ export const myProfileInitialState: MyProfileState = {
   isLoading: true,
   error: null,
   hasProfile: true,
+  equipments: [],
 };

@@ -5,6 +5,8 @@
       [myProfile]="myProfile"
       (updateProfile)="onProfileUpdated($event)"
     ></user-info>
-    <equipment></equipment>
+    <ng-container *ngIf="myEquipments$ | async as equipments">
+      <equipment [data]="equipments"></equipment>
+    </ng-container>
   </ng-container>
 </div>

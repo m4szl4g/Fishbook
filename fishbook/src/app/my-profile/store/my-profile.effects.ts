@@ -100,4 +100,23 @@ export class MyProfileEffects {
     }),
     catchError((error) => of(new myProfileActions.CreateEquipmentFailed(error)))
   );
+
+  @Effect()
+  getEquipment$ = this.actions$.pipe(
+    ofType(myProfileActions.MyProfileActionTypes.GET_EQUIPMENT),
+    withLatestFrom(this.store.select(authSelectors.getUser)),
+    switchMap(([, user]: [any, User]) => {
+      console.log('getequip', user.uid);
+      return this.equipmentService.getAll(user.uid).pipe(
+        map((equipments: Equipment[]) => {
+          console.log('equp', equipments);
+          return new myProfileActions.GetEquipmentSuccess(equipments);
+        }),
+        catchError((error) =>
+          of(new myProfileActions.GetEquipmentFailed(error))
+        )
+      );
+    }),
+    catchError((error) => of(new myProfileActions.GetEquipmentFailed(error)))
+  );
 }

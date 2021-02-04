@@ -12,3 +12,8 @@ export const getError = createSelector(
   getMyProfileState,
   (myProf) => myProf.error
 );
+
+export const getEquipments = createSelector(
+  getMyProfileState,
+  (myProf) => myProf.equipments
+);

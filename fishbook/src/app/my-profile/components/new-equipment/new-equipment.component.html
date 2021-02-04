@@ -2,12 +2,32 @@
   <h1>Set your equipment</h1>
   <form [formGroup]="newEquipmentForm">
     <div class="form-field">
+      <label class="form-field__label" for="rod"
+        >Set a friendly name for your equipment</label
+      >
+      <input
+        id="name"
+        formControlName="name"
+        class="form-field__input"
+        placeholder="Set name..."
+      />
+      <small
+        class="error-message"
+        *ngIf="name.errors?.required && name.touched"
+      >
+        This field is required.
+      </small>
+      <small class="error-message" *ngIf="name.errors?.maxlength">
+        The field is longer than 30 characters
+      </small>
+    </div>
+    <div class="form-field">
       <label class="form-field__label" for="rod">Rod</label>
       <input
         id="rod"
         formControlName="rod"
         class="form-field__input"
-        aria-placeholder="Set your rod..."
+        placeholder="Set your rod..."
       />
       <small class="error-message" *ngIf="rod.errors?.required && rod.touched">
         This field is required.
@@ -22,7 +42,7 @@
         id="reel"
         formControlName="reel"
         class="form-field__input"
-        aria-placeholder="Set your reel..."
+        placeholder="Set your reel..."
       />
       <small
         class="error-message"
@@ -40,7 +60,7 @@
         id="line"
         formControlName="line"
         class="form-field__input"
-        aria-placeholder="Set your line..."
+        placeholder="Set your line..."
       />
       <small
         class="error-message"

@@ -88,7 +88,7 @@ export class GetEquipment implements Action {
 export class GetEquipmentSuccess implements Action {
   readonly type = MyProfileActionTypes.GET_EQUIPMENT_SUCCESS;
 
-  constructor(public payload: Equipment) {}
+  constructor(public payload: Equipment[]) {}
 }
 
 export class GetEquipmentFailed implements Action {
@@ -124,4 +124,10 @@ export type MyProfileAction =
   | CreateSuccess
   | Update
   | UpdateFailed
-  | UpdateSuccess;
+  | UpdateSuccess
+  | GetEquipment
+  | GetEquipmentFailed
+  | GetEquipmentSuccess
+  | CreateEquipment
+  | CreateEquipmentFailed
+  | CreateEquipmentFailed;

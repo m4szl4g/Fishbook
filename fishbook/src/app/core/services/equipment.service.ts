@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { USER_RUNTIME_CHECKS } from '@ngrx/store';
 import { from, Observable } from 'rxjs';
-import { CreateEquipment } from 'src/app/my-profile/store/my-profile.actions';
+import { map } from 'rxjs/operators';
 import { Equipment } from 'src/app/shared/models/equipment.model';
 
 @Injectable({
@@ -22,6 +21,24 @@ export class EquipmentService {
         .collection(this.equipmentCollection)
         .doc()
         .set(newEquipment)
+    );
+  }
+
+  public getAll(userId: string): Observable<Equipment[]> {
+    return from(
+      this.firestore
+        .collection(this.userCollection)
+        .doc(userId)
+        .collection(this.equipmentCollection)
+        .snapshotChanges()
+        .pipe(
+          map((actions) =>
+            actions.map((document) => {
+              const equipment = document.payload.doc.data() as Equipment;
+              return equipment;
+            })
+          )
+        )
     );
   }
 }
