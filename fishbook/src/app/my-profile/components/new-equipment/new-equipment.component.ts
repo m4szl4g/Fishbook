@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Equipment } from 'src/app/shared/models/equipment.model';
+import * as fromActions from '../../store/my-profile.actions';
 
 @Component({
   selector: 'app-new-equipment',
@@ -9,7 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class NewEquipmentComponent implements OnInit {
   public newEquipmentForm: FormGroup;
 
-  constructor() {}
+  constructor(private store: Store) {}
 
   public ngOnInit(): void {
     this.newEquipmentForm = new FormGroup({
@@ -37,5 +40,12 @@ export class NewEquipmentComponent implements OnInit {
     return this.newEquipmentForm.get('line');
   }
 
-  public create(): void {}
+  public create(): void {
+    const equipment: Equipment = {
+      rod: this.line.value,
+      reel: this.reel.value,
+      line: this.line.value,
+    };
+    this.store.dispatch(new fromActions.CreateEquipment(equipment));
+  }
 }

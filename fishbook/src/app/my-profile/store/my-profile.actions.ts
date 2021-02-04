@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { User } from 'src/app/auth/models/user.model';
+import { Equipment } from 'src/app/shared/models/equipment.model';
 import { MyProfile } from '../../shared/models/my-profile.model';
 
 export enum MyProfileActionTypes {
@@ -14,6 +15,14 @@ export enum MyProfileActionTypes {
   UPDATE = '[MyProfile] Update',
   UPDATE_FAILED = '[MyProfile] Update Failed',
   UPDATE_SUCCESS = '[MyProfile] Update Success',
+
+  GET_EQUIPMENT = '[MyProfile] Get Equipment',
+  GET_EQUIPMENT_SUCCESS = '[MyProfile] Get Equipment Success',
+  GET_EQUIPMENT_FAILED = '[MyProfile] Get Equipment Failed',
+
+  CREATE_EQUIPMENT = '[MyProfile] Create Equipment',
+  CREATE_EQUIPMENT_SUCCESS = '[MyProfile] Create Equipment Success',
+  CREATE_EQUIPMENT_FAILED = '[MyProfile] Create Equipment Failed',
 }
 
 export class Get implements Action {
@@ -68,6 +77,42 @@ export class UpdateFailed implements Action {
   readonly type = MyProfileActionTypes.UPDATE_FAILED;
 
   constructor(public payload: { error: string }) {}
+}
+
+export class GetEquipment implements Action {
+  readonly type = MyProfileActionTypes.GET_EQUIPMENT;
+
+  constructor() {}
+}
+
+export class GetEquipmentSuccess implements Action {
+  readonly type = MyProfileActionTypes.GET_EQUIPMENT_SUCCESS;
+
+  constructor(public payload: Equipment) {}
+}
+
+export class GetEquipmentFailed implements Action {
+  readonly type = MyProfileActionTypes.GET_EQUIPMENT_FAILED;
+
+  constructor(public payload: string) {}
+}
+
+export class CreateEquipment implements Action {
+  readonly type = MyProfileActionTypes.CREATE_EQUIPMENT;
+
+  constructor(public payload: Equipment) {}
+}
+
+export class CreateEquipmentFailed implements Action {
+  readonly type = MyProfileActionTypes.CREATE_EQUIPMENT_FAILED;
+
+  constructor(public payload: string) {}
+}
+
+export class CreateEquipmentSuccess implements Action {
+  readonly type = MyProfileActionTypes.CREATE_EQUIPMENT_SUCCESS;
+
+  constructor() {}
 }
 
 export type MyProfileAction =

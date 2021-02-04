@@ -15,12 +15,15 @@ import { MyProfile } from '../../shared/models/my-profile.model';
 import { MyProfileService } from '../../core/services/my-profile.service';
 import * as authSelectors from './../../auth/store/auth.selectors';
 import * as myProfileActions from './../store/my-profile.actions';
+import { Equipment } from 'src/app/shared/models/equipment.model';
+import { EquipmentService } from 'src/app/core/services/equipment.service';
 
 @Injectable()
 export class MyProfileEffects {
   constructor(
     private actions$: Actions,
     private myProfileService: MyProfileService,
+    private equipmentService: EquipmentService,
     private router: Router,
     private store: Store
   ) {}
@@ -64,7 +67,6 @@ export class MyProfileEffects {
     map((action: myProfileActions.Update) => action.payload),
     withLatestFrom(this.store.select(authSelectors.getUser)),
     switchMap(([profile, user]: [MyProfile, User]) => {
-      console.log('test', profile);
       return this.myProfileService.update(profile, user).pipe(
         map(() => {
           return new myProfileActions.UpdateSuccess({ myProfile: profile });
@@ -76,5 +78,26 @@ export class MyProfileEffects {
       );
     }),
     catchError((error) => of(new myProfileActions.UpdateFailed({ error })))
+  );
+
+  @Effect()
+  createEquipment$ = this.actions$.pipe(
+    ofType(myProfileActions.MyProfileActionTypes.CREATE_EQUIPMENT),
+    map((action: myProfileActions.CreateEquipment) => action.payload),
+    withLatestFrom(this.store.select(authSelectors.getUser)),
+    switchMap(([equipment, user]: [Equipment, User]) => {
+      return this.equipmentService.create(equipment, user.uid).pipe(
+        map(() => {
+          return new myProfileActions.CreateEquipmentSuccess();
+        }),
+        tap(() => {
+          this.router.navigateByUrl('my-profile');
+        }),
+        catchError((error) =>
+          of(new myProfileActions.CreateEquipmentFailed(error))
+        )
+      );
+    }),
+    catchError((error) => of(new myProfileActions.CreateEquipmentFailed(error)))
   );
 }
