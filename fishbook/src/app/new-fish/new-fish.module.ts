@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NewFishComponent } from './components/new-fish/new-fish.component';
-
-
+import { NewFishComponent } from './container/new-fish.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [NewFishComponent],
-  imports: [
-    CommonModule
-  ],
-  exports: [NewFishComponent]
+  imports: [CommonModule, SharedModule],
+  exports: [NewFishComponent],
 })
-export class NewFishModule { }
+export class NewFishModule {}
