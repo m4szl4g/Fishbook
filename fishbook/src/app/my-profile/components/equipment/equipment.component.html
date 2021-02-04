@@ -3,17 +3,17 @@
   <div class="equipment__list">
     <div class="equipment-item" *ngFor="let equipment of data">
       <h4>{{ equipment.name }}</h4>
-      <div>
-        <span>Rod:</span>
-        <span>{{ equipment.rod }}</span>
+      <div class="equipment-item__element">
+        <span class="equipment-item__title">Rod:</span>
+        <span class="equipment-item__value">{{ equipment.rod }}</span>
       </div>
-      <div>
-        <span>Reel:</span>
-        <span>{{ equipment.reel }}</span>
+      <div class="equipment-item__element">
+        <span class="equipment-item__title">Reel:</span>
+        <span class="equipment-item__value">{{ equipment.reel }}</span>
       </div>
-      <div>
-        <span>Line:</span>
-        <span>{{ equipment.line }}</span>
+      <div class="equipment-item__element">
+        <span class="equipment-item__title">Line:</span>
+        <span class="equipment-item__value">{{ equipment.line }}</span>
       </div>
     </div>
   </div>
