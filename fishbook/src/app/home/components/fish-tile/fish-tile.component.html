@@ -1,26 +1,26 @@
 <div class="fish-tile">
   <div class="user">
-    <img class="user__pic" [src]="data.profileImgUrl" />
+    <img class="user__pic avatar" [src]="data.profileImgUrl" />
     <span class="user__name">{{ data.name }}</span>
   </div>
   <img class="fish-tile__pic" [src]="data.fishImgUrl" />
-  <div class="equipment">
-    <div class="equipment__rod">
-      <img />
+  <div class="details">
+    <div class="details__element">
+      <img src="../../../../assets/images/rod.png" />
       <span> {{ data.rod }}</span>
     </div>
-    <div class="equipment__reel">
-      <img />
+    <div class="details__element">
+      <img src="../../../../assets/images/reel.png" />
       <span>{{ data.reel }}</span>
     </div>
-    <div class="equipment__where">
-      <img />
+    <div class="details__element">
+      <img src="../../../../assets/images/water.png" />
       <span>{{ data.where }}</span>
     </div>
   </div>
   <div class="comments">
     <a
-      ><span>{{ data.commentCount }}</span></a
+      ><span>comments({{ data.commentCount }})</span></a
     >
   </div>
 </div>
