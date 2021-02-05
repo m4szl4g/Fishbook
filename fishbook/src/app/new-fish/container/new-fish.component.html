@@ -46,12 +46,18 @@
     </div>
     <div class="form-field">
       <label class="form-field__label" for="equipment">Equipment</label>
-      <input
+      <select
         id="equipment"
-        formControlName="equipment"
         class="form-field__input"
-        placeholder="Select your equipment..."
-      />
+        formControlName="equipment"
+      >
+        <option class="option-placeholder" value="" disabled selected>
+          Select your equipment...
+        </option>
+        <option *ngFor="let equip of myEquipments" [value]="equip">
+          {{ equip.name }}
+        </option>
+      </select>
       <small
         class="error-message"
         *ngIf="equipment.errors?.required && equipment.touched"

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Equipment } from 'src/app/shared/models/equipment.model';
 
 @Component({
   selector: 'app-new-fish',
@@ -8,6 +9,20 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class NewFishComponent implements OnInit {
   public newFishForm: FormGroup;
+  public myEquipments: Equipment[] = [
+    {
+      line: 'Spro 20mm',
+      name: 'Stuff 1',
+      reel: 'Reel 111',
+      rod: 'Rod 1',
+    },
+    {
+      line: 'Spro 30mm',
+      name: 'Stuff 2',
+      reel: 'Reel 2',
+      rod: 'Rod 2',
+    },
+  ];
 
   constructor() {}
 
