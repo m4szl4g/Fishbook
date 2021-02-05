@@ -2,7 +2,7 @@
   <div class="header">
     <img class="header__img" src="../../../assets/images/fish_bw.jpg" />
     <div class="header__texts">
-      <h1>Congrats to new your fish!</h1>
+      <h1>Congrats to your new fish!</h1>
       <h4>Let share some details with others!</h4>
     </div>
   </div>
@@ -44,27 +44,29 @@
         This field is required.
       </small>
     </div>
-    <div class="form-field">
-      <label class="form-field__label" for="equipment">Equipment</label>
-      <select
-        id="equipment"
-        class="form-field__input"
-        formControlName="equipment"
-      >
-        <option class="option-placeholder" value="" disabled selected>
-          Select your equipment...
-        </option>
-        <option *ngFor="let equip of myEquipments" [value]="equip">
-          {{ equip.name }}
-        </option>
-      </select>
-      <small
-        class="error-message"
-        *ngIf="equipment.errors?.required && equipment.touched"
-      >
-        This field is required.
-      </small>
-    </div>
+    <ng-container *ngIf="myEquipments$ | async as myEquipments">
+      <div class="form-field">
+        <label class="form-field__label" for="equipment">Equipment</label>
+        <select
+          id="equipment"
+          class="form-field__input"
+          formControlName="equipment"
+        >
+          <option class="option-placeholder" value="" disabled selected>
+            Select your equipment...
+          </option>
+          <option *ngFor="let equip of myEquipments" [value]="equip">
+            {{ equip.name }}
+          </option>
+        </select>
+        <small
+          class="error-message"
+          *ngIf="equipment.errors?.required && equipment.touched"
+        >
+          This field is required.
+        </small>
+      </div>
+    </ng-container>
     <div class="form-field">
       <label class="form-field__label" for="details">Details</label>
       <textarea
@@ -81,7 +83,7 @@
       </small>
     </div>
     <div class="form-action-buttons">
-      <button class="btn btn--success">Upload</button>
+      <button class="btn btn--success" (click)="upload()">Upload</button>
       <button class="btn btn--error">Cancel</button>
     </div>
   </form>

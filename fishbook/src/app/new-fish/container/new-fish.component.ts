@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Equipment } from 'src/app/shared/models/equipment.model';
+import * as fromEquipmentActions from '../../my-profile/store/my-profile.actions';
+import * as fromEquipmentSelectors from '../../my-profile/store/my-profile.selectors';
 
 @Component({
   selector: 'app-new-fish',
@@ -9,22 +13,14 @@ import { Equipment } from 'src/app/shared/models/equipment.model';
 })
 export class NewFishComponent implements OnInit {
   public newFishForm: FormGroup;
-  public myEquipments: Equipment[] = [
-    {
-      line: 'Spro 20mm',
-      name: 'Stuff 1',
-      reel: 'Reel 111',
-      rod: 'Rod 1',
-    },
-    {
-      line: 'Spro 30mm',
-      name: 'Stuff 2',
-      reel: 'Reel 2',
-      rod: 'Rod 2',
-    },
-  ];
+  public myEquipments$: Observable<Equipment[]>;
 
-  constructor() {}
+  constructor(private store: Store) {
+    this.store.dispatch(new fromEquipmentActions.GetEquipment());
+    this.myEquipments$ = this.store.select(
+      fromEquipmentSelectors.getEquipments
+    );
+  }
 
   public ngOnInit(): void {
     this.newFishForm = new FormGroup({
@@ -49,5 +45,9 @@ export class NewFishComponent implements OnInit {
 
   get details() {
     return this.newFishForm.get('details');
+  }
+
+  public upload(): void {
+    console.log();
   }
 }

@@ -106,10 +106,8 @@ export class MyProfileEffects {
     ofType(myProfileActions.MyProfileActionTypes.GET_EQUIPMENT),
     withLatestFrom(this.store.select(authSelectors.getUser)),
     switchMap(([, user]: [any, User]) => {
-      console.log('getequip', user.uid);
       return this.equipmentService.getAll(user.uid).pipe(
         map((equipments: Equipment[]) => {
-          console.log('equp', equipments);
           return new myProfileActions.GetEquipmentSuccess(equipments);
         }),
         catchError((error) =>
