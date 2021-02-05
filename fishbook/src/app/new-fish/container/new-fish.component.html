@@ -1,24 +1,75 @@
 <div class="new-fish">
   <div class="header">
-    <img src="../../../assets/images/fish_bw.jpg" />
-    <h1>Congrats to new fish!</h1>
-    <h4>Let share some details with others!</h4>
+    <img class="header__img" src="../../../assets/images/fish_bw.jpg" />
+    <div class="header__texts">
+      <h1>Congrats to new your fish!</h1>
+      <h4>Let share some details with others!</h4>
+    </div>
   </div>
 
   <hr />
 
   <form [formGroup]="newFishForm">
+    <div class="form-field-upload">
+      <span class="form-field__label">Photo</span
+      ><button class="btn btn--small btn--success">+</button>
+    </div>
     <div class="form-field">
       <label class="form-field__label" for="fish">Fish</label>
       <input
         id="fish"
         formControlName="fish"
         class="form-field__input"
-        placeholder="Set name..."
+        placeholder="What kind of fish..."
       />
       <small
         class="error-message"
         *ngIf="fish.errors?.required && fish.touched"
+      >
+        This field is required.
+      </small>
+    </div>
+    <div class="form-field">
+      <label class="form-field__label" for="where">Where</label>
+      <input
+        id="where"
+        formControlName="where"
+        class="form-field__input"
+        placeholder="Where did you catch..."
+      />
+      <small
+        class="error-message"
+        *ngIf="where.errors?.required && where.touched"
+      >
+        This field is required.
+      </small>
+    </div>
+    <div class="form-field">
+      <label class="form-field__label" for="equipment">Equipment</label>
+      <input
+        id="equipment"
+        formControlName="equipment"
+        class="form-field__input"
+        placeholder="Select your equipment..."
+      />
+      <small
+        class="error-message"
+        *ngIf="equipment.errors?.required && equipment.touched"
+      >
+        This field is required.
+      </small>
+    </div>
+    <div class="form-field">
+      <label class="form-field__label" for="details">Details</label>
+      <textarea
+        id="details"
+        formControlName="details"
+        class="form-field__input"
+        placeholder="Share some details..."
+      ></textarea>
+      <small
+        class="error-message"
+        *ngIf="details.errors?.required && details.touched"
       >
         This field is required.
       </small>
