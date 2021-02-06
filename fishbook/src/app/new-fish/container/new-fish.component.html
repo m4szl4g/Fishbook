@@ -55,7 +55,7 @@
           <option class="option-placeholder" value="" disabled selected>
             Select your equipment...
           </option>
-          <option *ngFor="let equip of myEquipments" [value]="equip">
+          <option *ngFor="let equip of myEquipments" [ngValue]="equip">
             {{ equip.name }}
           </option>
         </select>
@@ -83,7 +83,13 @@
       </small>
     </div>
     <div class="form-action-buttons">
-      <button class="btn btn--success" (click)="upload()">Upload</button>
+      <button
+        class="btn btn--success"
+        [disabled]="!newFishForm.valid && newFishForm.disabled === false"
+        (click)="upload()"
+      >
+        Upload
+      </button>
       <button class="btn btn--error">Cancel</button>
     </div>
   </form>
