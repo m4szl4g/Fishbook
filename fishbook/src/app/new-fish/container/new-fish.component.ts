@@ -16,6 +16,7 @@ import * as fromEquipmentSelectors from '../../my-profile/store/my-profile.selec
 export class NewFishComponent implements OnInit {
   public newFishForm: FormGroup;
   public myEquipments$: Observable<Equipment[]>;
+  public photoToUpload: File = null;
 
   constructor(private store: Store) {}
 
@@ -47,6 +48,10 @@ export class NewFishComponent implements OnInit {
 
   get details() {
     return this.newFishForm.get('details');
+  }
+
+  public uploadPhoto(files: File[]) {
+    this.photoToUpload = files[0];
   }
 
   public upload(): void {

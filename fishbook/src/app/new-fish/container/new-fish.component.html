@@ -11,8 +11,21 @@
 
   <form [formGroup]="newFishForm">
     <div class="form-field-upload">
-      <span class="form-field__label">Photo</span
-      ><button class="btn btn--small btn--success">+</button>
+      <input
+        #upload
+        class="btn btn-success"
+        hidden="true"
+        type="file"
+        onclick="this.value=null"
+        (change)="uploadPhoto($event.target.files)"
+        accept=".jpeg, .png"
+      />
+      <button class="btn btn--success" (click)="upload.click()">
+        Select a photo...
+      </button>
+      <div *ngIf="photoToUpload">
+        <span>File is selected and ready to upload...</span>
+      </div>
     </div>
     <div class="form-field">
       <label class="form-field__label" for="fish">Fish</label>
