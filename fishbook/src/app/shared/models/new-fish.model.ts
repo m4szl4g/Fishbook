@@ -5,4 +5,6 @@ export interface NewCatch {
   fishType: string;
   details: string;
   userId?: string;
+  userName?: string;
+  filePath?: string;
 }

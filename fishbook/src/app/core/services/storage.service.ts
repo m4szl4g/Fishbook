@@ -19,24 +19,15 @@ export class StorageService {
 
   constructor(private storage: AngularFireStorage) {}
 
-  public upload(file: File): FilesUploadMetadata {
-    const filePath = `${this.storagePath}/${new Date().getTime()}_${file.name}`;
+  public upload(file: File): Observable<string> {
+    const filePath = `${this.storagePath}/catch/${file.name}`;
     const uploadTask: AngularFireUploadTask = this.storage.upload(
       filePath,
       file
     );
-    return {
-      uploadProgress$: uploadTask.percentageChanges(),
-      downloadUrl$: this.getUrl(uploadTask, filePath),
-    };
-  }
 
-  private getUrl(
-    uploadTask: AngularFireUploadTask,
-    path: string
-  ): Observable<string> {
     return from(uploadTask).pipe(
-      switchMap(() => this.storage.ref(path).getDownloadURL())
+      switchMap(() => this.storage.ref(filePath).getDownloadURL())
     );
   }
 }

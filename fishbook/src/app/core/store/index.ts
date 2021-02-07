@@ -9,17 +9,21 @@ import * as fromMyProfile from '../../my-profile/store/my-profile.reducer';
 import { AuthState } from '../../auth/store/auth.state';
 import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 import { MyProfileState } from 'src/app/my-profile/store/my-profile.state';
+import { CatchState } from './catch/catch.state';
+import { catchReducer } from './catch/catch.reducer';
 
 export interface AppState {
   auth: AuthState;
   myProfile: MyProfileState;
   router: RouterReducerState;
+  catch: CatchState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
   auth: fromAuth.authReducer,
   myProfile: fromMyProfile.myProfileReducer,
   router: routerReducer,
+  catch: catchReducer,
 };
 
 export function clearState(

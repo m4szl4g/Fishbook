@@ -54,7 +54,7 @@ export class NewFishComponent implements OnInit {
     this.photoToUpload = files[0];
   }
 
-  public upload(): void {
+  public submit(): void {
     const equipment: Equipment = this.equipment.value;
     const newCatch: NewCatch = {
       details: this.details.value,
@@ -64,6 +64,8 @@ export class NewFishComponent implements OnInit {
       rod: equipment.rod,
     };
 
-    this.store.dispatch(new fromCatchActions.Create(newCatch));
+    this.store.dispatch(
+      new fromCatchActions.UploadFile(this.photoToUpload, newCatch)
+    );
   }
 }
