@@ -14,6 +14,7 @@ import { User } from 'src/app/auth/models/user.model';
 import { NewCatch } from 'src/app/shared/models/new-fish.model';
 import * as authSelectors from '../../../auth/store/auth.selectors';
 import { CatchService } from '../../services/catch.service';
+import { StorageService } from '../../services/storage.service';
 import * as fromCatchActions from './catch.actions';
 
 @Injectable()
@@ -22,21 +23,41 @@ export class CatchEffects {
     private actions$: Actions,
     private catchService: CatchService,
     private router: Router,
-    private store: Store
+    private store: Store,
+    private storageService: StorageService
   ) {}
+
+  @Effect()
+  uploadFile$ = this.actions$.pipe(
+    ofType(fromCatchActions.CatchActionsTypes.UPLOAD_FILE),
+    map((action: fromCatchActions.UploadFile) => action),
+    withLatestFrom(this.store.select(authSelectors.getUser)),
+    switchMap(([data, user]: [any, User]) => {
+      return this.storageService.upload(data.file).pipe(
+        map((path: string) => {
+          const newCatch: NewCatch = {
+            ...data.payload,
+            filePath: path,
+            userId: user.uid,
+            userName: user.displayName,
+          };
+
+          return new fromCatchActions.Create(newCatch);
+        }),
+        tap(() => {
+          this.router.navigateByUrl('/');
+        }),
+        catchError((error) => of(new fromCatchActions.UploadFileFailed(error)))
+      );
+    })
+  );
 
   @Effect()
   create$ = this.actions$.pipe(
     ofType(fromCatchActions.CatchActionsTypes.CREATE),
     map((action: fromCatchActions.Create) => action.payload),
-    withLatestFrom(this.store.select(authSelectors.getUser)),
-    switchMap(([data, user]: [NewCatch, User]) => {
-      const newCatch: NewCatch = {
-        ...data,
-        userId: user.uid,
-      };
-
-      return this.catchService.create(newCatch).pipe(
+    switchMap((data: NewCatch) => {
+      return this.catchService.create(data).pipe(
         map(() => {
           return new fromCatchActions.CreateSuccess();
         }),
