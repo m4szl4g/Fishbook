@@ -30,9 +30,8 @@ export class CatchEffects {
   @Effect()
   uploadFile$ = this.actions$.pipe(
     ofType(fromCatchActions.CatchActionsTypes.UPLOAD_FILE),
-    map((action: fromCatchActions.UploadFile) => action),
     withLatestFrom(this.store.select(authSelectors.getUser)),
-    switchMap(([data, user]: [any, User]) => {
+    switchMap(([data, user]: [fromCatchActions.UploadFile, User]) => {
       return this.storageService.upload(data.file).pipe(
         map((path: string) => {
           const newCatch: NewCatch = {

@@ -40,4 +40,9 @@ export class CreateSuccess implements Action {
   constructor() {}
 }
 
-export type CatchActions = Create | CreateFailed | CreateSuccess;
+export type CatchActions =
+  | Create
+  | CreateFailed
+  | CreateSuccess
+  | UploadFileFailed
+  | UploadFile;

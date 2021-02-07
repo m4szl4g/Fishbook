@@ -28,6 +28,21 @@ export function catchReducer(
       };
     }
 
+    case CatchActionsTypes.UPLOAD_FILE: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
+    case CatchActionsTypes.UPLOAD_FILE_FAILED: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    }
+
     default:
       return state;
   }
