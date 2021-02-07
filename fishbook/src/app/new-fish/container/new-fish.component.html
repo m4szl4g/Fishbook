@@ -12,7 +12,8 @@
   <form [formGroup]="newFishForm">
     <div class="form-field-upload">
       <input
-        #upload
+        #fileToUpload
+        formControlName="fileToUpload"
         class="btn btn-success"
         hidden="true"
         type="file"
@@ -20,7 +21,7 @@
         (change)="uploadPhoto($event.target.files)"
         accept=".jpeg, .png"
       />
-      <button class="btn btn--success" (click)="upload.click()">
+      <button class="btn btn--success" (click)="fileToUpload.click()">
         Select a photo...
       </button>
       <div *ngIf="photoToUpload">

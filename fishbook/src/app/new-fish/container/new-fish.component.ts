@@ -31,6 +31,7 @@ export class NewFishComponent implements OnInit {
       where: new FormControl('', [Validators.required]),
       equipment: new FormControl('', [Validators.required]),
       details: new FormControl('', [Validators.required]),
+      fileToUpload: new FormControl('', [Validators.required]),
     });
   }
 
@@ -50,8 +51,12 @@ export class NewFishComponent implements OnInit {
     return this.newFishForm.get('details');
   }
 
+  get fileToUpload() {
+    return this.newFishForm.get('fileToUpload');
+  }
+
   public uploadPhoto(files: File[]) {
-    this.photoToUpload = files[0];
+    this.fileToUpload.setValue(files[0]);
   }
 
   public submit(): void {
@@ -65,7 +70,7 @@ export class NewFishComponent implements OnInit {
     };
 
     this.store.dispatch(
-      new fromCatchActions.UploadFile(this.photoToUpload, newCatch)
+      new fromCatchActions.UploadFile(this.fileToUpload.value, newCatch)
     );
   }
 }
