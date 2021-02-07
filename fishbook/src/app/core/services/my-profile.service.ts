@@ -24,6 +24,7 @@ export class MyProfileService {
             firstName: doc.payload.get('firstName'),
             lastName: doc.payload.get('lastName'),
             aboutMe: doc.payload.get('aboutMe'),
+            email: doc.payload.get('email'),
           };
           return mappedObject;
         })

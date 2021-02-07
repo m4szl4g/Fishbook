@@ -1,6 +1,15 @@
 <div class="my-profile">
   <ng-container *ngIf="myProfile$ | async as myProfile">
-    <h1>My Profile</h1>
+    <div class="welcome">
+      <img
+        class="user-info__pic avatar avatar--lg"
+        src="../../../../assets/images/default_profile.png"
+      />
+      <h1>
+        Hi {{ myProfile.firstName ? myProfile.firstName : myProfile.email }}!
+      </h1>
+    </div>
+
     <user-info
       [myProfile]="myProfile"
       (updateProfile)="onProfileUpdated($event)"

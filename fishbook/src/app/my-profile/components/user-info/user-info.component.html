@@ -1,26 +1,28 @@
 <div class="user-info">
-  <div>
-    <img class="user-info__pic" src="../../../../assets/images/profile.png" />
-  </div>
   <form class="user-info__form" [formGroup]="myProfileForm">
-    <div class="form-field">
-      <label class="form-field__label" for="firstName">First name</label>
-      <input
-        id="firstName"
-        formControlName="firstName"
-        class="form-field__input"
-        aria-placeholder="Your first name..."
-      />
+    <div>
+      <div class="form__names">
+        <div class="form-field">
+          <label class="form-field__label" for="firstName">First name</label>
+          <input
+            id="firstName"
+            formControlName="firstName"
+            class="form-field__input"
+            aria-placeholder="Your first name..."
+          />
+        </div>
+        <div class="form-field">
+          <label class="form-field__label" for="lastName">Last name</label>
+          <input
+            id="lastName"
+            formControlName="lastName"
+            class="form-field__input"
+            aria-placeholder="Last name..."
+          />
+        </div>
+      </div>
     </div>
-    <div class="form-field">
-      <label class="form-field__label" for="lastName">Last name</label>
-      <input
-        id="lastName"
-        formControlName="lastName"
-        class="form-field__input"
-        aria-placeholder="Last name..."
-      />
-    </div>
+
     <div class="form-field">
       <label class="form-field__label" for="aboutMe">About me</label>
       <textarea
@@ -30,6 +32,8 @@
         aria-placeholder="Share some thoughts about you..."
       ></textarea>
     </div>
-    <button class="btn btn--success" (click)="update()">Save</button>
+    <div class="action-buttons">
+      <button class="btn btn--success" (click)="update()">Save</button>
+    </div>
   </form>
 </div>

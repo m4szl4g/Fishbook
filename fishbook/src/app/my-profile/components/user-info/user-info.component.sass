@@ -2,14 +2,35 @@
 
 .user-info
     display: flex
-    flex-direction: row
-    margin: 20px 0 20px
-    justify-content: space-around
+    flex-direction: column
+    margin-bottom: 20px
+    justify-content: center
+    padding: 30px
+
+form
+    display: flex
+    flex-direction: column
+    justify-content: center
+
+    & button
+        max-width: 200px
+
+.action-buttons
+    display: flex
+    justify-content: center
+
+.form__names
+    display: flex
+    width: 100%
+    justify-content: space-evenly
+
+    & .form-field
+        width: 400px
 
 .user-info__pic
     max-height: 140px
+    margin-bottom: 30px
 
 textarea
     resize: none
-    height: 200px
-    width: 300px
+    height: 150px

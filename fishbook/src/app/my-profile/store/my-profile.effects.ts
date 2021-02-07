@@ -35,6 +35,7 @@ export class MyProfileEffects {
     switchMap(([empty, user]: [void, User]) => {
       return this.myProfileService.get(user.uid).pipe(
         map((profile: MyProfile) => {
+          profile.email = user.email;
           return new myProfileActions.GetSuccess({ myProfile: profile });
         }),
         tap(() => {
