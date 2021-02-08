@@ -1,9 +1,9 @@
 <div class="fish-tile">
   <div class="user">
-    <img class="user__pic avatar" [src]="data.profileImgUrl" />
-    <span class="user__name">{{ data.name }}</span>
+    <img class="user__pic avatar" [src]="data.fishType | profilePicture" />
+    <span class="user__name">{{ data.userName }}</span>
   </div>
-  <img class="fish-tile__pic" [src]="data.fishImgUrl" />
+  <img class="fish-tile__pic" [src]="data.filePath" />
   <div class="details">
     <div class="details__element">
       <img src="../../../../assets/images/rod.png" />
@@ -15,12 +15,10 @@
     </div>
     <div class="details__element">
       <img src="../../../../assets/images/water.png" />
-      <span>{{ data.where }}</span>
+      <span>{{ data.location }}</span>
     </div>
   </div>
   <div class="comments">
-    <a
-      ><span>comments({{ data.commentCount }})</span></a
-    >
+    <a><span>comments( data.commentCount }})</span></a>
   </div>
 </div>

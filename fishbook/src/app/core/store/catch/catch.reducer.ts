@@ -43,6 +43,21 @@ export function catchReducer(
       };
     }
 
+    case CatchActionsTypes.GET_ALL: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
+    case CatchActionsTypes.GET_ALL_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        catches: action.payload,
+      };
+    }
+
     default:
       return state;
   }

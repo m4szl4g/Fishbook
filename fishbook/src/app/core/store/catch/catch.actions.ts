@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { NewCatch } from 'src/app/shared/models/new-fish.model';
+import { Catch } from 'src/app/shared/models/new-fish.model';
 
 export enum CatchActionsTypes {
   CREATE = '[Catch] Create',
@@ -8,12 +8,16 @@ export enum CatchActionsTypes {
 
   UPLOAD_FILE = '[Catch] Upload file',
   UPLOAD_FILE_FAILED = '[Catch] Upload file Failed',
+
+  GET_ALL = '[Catch] Get All',
+  GET_ALL_SUCCESS = '[Catch] Get All Success',
+  GET_ALL_FAILED = '[Catch] Get All Failed',
 }
 
 export class UploadFile implements Action {
   readonly type = CatchActionsTypes.UPLOAD_FILE;
 
-  constructor(public file: File, public payload: NewCatch) {}
+  constructor(public file: File, public payload: Catch) {}
 }
 
 export class UploadFileFailed implements Action {
@@ -25,7 +29,7 @@ export class UploadFileFailed implements Action {
 export class Create implements Action {
   readonly type = CatchActionsTypes.CREATE;
 
-  constructor(public payload: NewCatch) {}
+  constructor(public payload: Catch) {}
 }
 
 export class CreateFailed implements Action {
@@ -40,9 +44,30 @@ export class CreateSuccess implements Action {
   constructor() {}
 }
 
+export class GetAll implements Action {
+  readonly type = CatchActionsTypes.GET_ALL;
+
+  constructor() {}
+}
+
+export class GetAllSuccess implements Action {
+  readonly type = CatchActionsTypes.GET_ALL_SUCCESS;
+
+  constructor(public payload: Catch[]) {}
+}
+
+export class GetAllFailed implements Action {
+  readonly type = CatchActionsTypes.GET_ALL_FAILED;
+
+  constructor(public error: string) {}
+}
+
 export type CatchActions =
   | Create
   | CreateFailed
   | CreateSuccess
   | UploadFileFailed
-  | UploadFile;
+  | UploadFile
+  | GetAllSuccess
+  | GetAll
+  | GetAllFailed;

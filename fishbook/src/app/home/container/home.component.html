@@ -1,4 +1,7 @@
 <div class="home">
-  <fish-tile [data]="dummyData1"> </fish-tile>
-  <fish-tile [data]="dummyData2"> </fish-tile>
+  <ng-container *ngIf="catches$ | async as catches">
+    <div *ngFor="let ctch of catches">
+      <fish-tile [data]="ctch"> </fish-tile>
+    </div>
+  </ng-container>
 </div>

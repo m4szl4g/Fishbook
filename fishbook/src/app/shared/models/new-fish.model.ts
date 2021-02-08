@@ -1,4 +1,4 @@
-export interface NewCatch {
+export interface Catch {
   rod: string;
   location: string;
   reel: string;

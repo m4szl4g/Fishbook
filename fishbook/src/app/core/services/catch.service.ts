@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
-import { NewCatch } from 'src/app/shared/models/new-fish.model';
+import { map } from 'rxjs/operators';
+import { Catch } from 'src/app/shared/models/new-fish.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,11 +10,22 @@ import { NewCatch } from 'src/app/shared/models/new-fish.model';
 export class CatchService {
   private catchesCollection = 'catches';
 
-  constructor(private fireStore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore) {}
 
-  public create(data: NewCatch): Observable<void> {
+  public create(data: Catch): Observable<void> {
     return from(
-      this.fireStore.collection(this.catchesCollection).doc().set(data)
+      this.firestore.collection(this.catchesCollection).doc().set(data)
     );
+  }
+
+  public getAll(): Observable<Catch[]> {
+    return this.firestore
+      .collection(this.catchesCollection)
+      .valueChanges()
+      .pipe(
+        map((data) => {
+          return data as Catch[];
+        })
+      );
   }
 }

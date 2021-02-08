@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FishTile } from 'src/app/shared/models/fish-tile.model';
+import { Catch } from 'src/app/shared/models/new-fish.model';
 
 @Component({
   selector: 'fish-tile',
@@ -8,7 +8,7 @@ import { FishTile } from 'src/app/shared/models/fish-tile.model';
 })
 export class FishTileComponent implements OnInit {
   @Input()
-  public data: FishTile;
+  public data: Catch;
 
   constructor() {}
 

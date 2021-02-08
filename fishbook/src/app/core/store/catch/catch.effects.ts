@@ -11,7 +11,7 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 import { User } from 'src/app/auth/models/user.model';
-import { NewCatch } from 'src/app/shared/models/new-fish.model';
+import { Catch } from 'src/app/shared/models/new-fish.model';
 import * as authSelectors from '../../../auth/store/auth.selectors';
 import { CatchService } from '../../services/catch.service';
 import { StorageService } from '../../services/storage.service';
@@ -34,7 +34,7 @@ export class CatchEffects {
     switchMap(([data, user]: [fromCatchActions.UploadFile, User]) => {
       return this.storageService.upload(data.file).pipe(
         map((path: string) => {
-          const newCatch: NewCatch = {
+          const newCatch: Catch = {
             ...data.payload,
             filePath: path,
             userId: user.uid,
@@ -55,7 +55,7 @@ export class CatchEffects {
   create$ = this.actions$.pipe(
     ofType(fromCatchActions.CatchActionsTypes.CREATE),
     map((action: fromCatchActions.Create) => action.payload),
-    switchMap((data: NewCatch) => {
+    switchMap((data: Catch) => {
       return this.catchService.create(data).pipe(
         map(() => {
           return new fromCatchActions.CreateSuccess();
@@ -64,6 +64,22 @@ export class CatchEffects {
           this.router.navigateByUrl('/');
         }),
         catchError((error) => of(new fromCatchActions.CreateFailed(error)))
+      );
+    })
+  );
+
+  @Effect()
+  get$ = this.actions$.pipe(
+    ofType(fromCatchActions.CatchActionsTypes.GET_ALL),
+    switchMap(() => {
+      return this.catchService.getAll().pipe(
+        map((catches: Catch[]) => {
+          return new fromCatchActions.GetAllSuccess(catches);
+        }),
+        tap(() => {
+          this.router.navigateByUrl('/');
+        }),
+        catchError((error) => of(new fromCatchActions.GetAllFailed(error)))
       );
     })
   );

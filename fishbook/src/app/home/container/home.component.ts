@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FishTile } from 'src/app/shared/models/fish-tile.model';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Catch } from 'src/app/shared/models/new-fish.model';
+import * as fromCatchActions from '../../core/store/catch/catch.actions';
+import * as fromCatchSelectors from '../../core/store/catch/catch.selectors';
 
 @Component({
   selector: 'app-home',
@@ -7,27 +11,12 @@ import { FishTile } from 'src/app/shared/models/fish-tile.model';
   styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent implements OnInit {
-  public dummyData1: FishTile = {
-    fishImgUrl: '../../../assets/images/dummy_pike.jpg',
-    commentCount: 10,
-    name: 'John',
-    rod: 'Shimano Beast Master 270',
-    reel: 'Spro Blue Arc',
-    profileImgUrl: '../../../assets/images/default_profile.png',
-    where: 'Danube',
-  };
+  public catches$: Observable<Catch[]>;
 
-  public dummyData2: FishTile = {
-    fishImgUrl: '../../../assets/images/dummy_pike2.jpg',
-    commentCount: 4,
-    name: 'Steve',
-    rod: 'Spro Spinner 230',
-    reel: 'Shimano Ultegra',
-    profileImgUrl: '../../../assets/images/default_profile.png',
-    where: 'Balaton Lake',
-  };
+  constructor(private store: Store) {}
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  public ngOnInit(): void {
+    this.catches$ = this.store.select(fromCatchSelectors.getCatches);
+    this.store.dispatch(new fromCatchActions.GetAll());
+  }
 }

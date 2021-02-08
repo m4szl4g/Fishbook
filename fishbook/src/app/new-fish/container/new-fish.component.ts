@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Equipment } from 'src/app/shared/models/equipment.model';
-import { NewCatch } from 'src/app/shared/models/new-fish.model';
+import { Catch } from 'src/app/shared/models/new-fish.model';
 import * as fromCatchActions from '../../core/store/catch/catch.actions';
 import * as fromEquipmentActions from '../../my-profile/store/my-profile.actions';
 import * as fromEquipmentSelectors from '../../my-profile/store/my-profile.selectors';
@@ -61,7 +61,7 @@ export class NewFishComponent implements OnInit {
 
   public submit(): void {
     const equipment: Equipment = this.equipment.value;
-    const newCatch: NewCatch = {
+    const newCatch: Catch = {
       details: this.details.value,
       fishType: this.details.value,
       location: this.where.value,
