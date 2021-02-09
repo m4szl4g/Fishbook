@@ -1,4 +1,4 @@
-import { Catch } from 'src/app/shared/models/new-fish.model';
+import { Catch } from 'src/app/shared/models/catch.model';
 
 export interface CatchState {
   isLoading: boolean;

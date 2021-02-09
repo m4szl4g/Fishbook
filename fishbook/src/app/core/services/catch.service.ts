@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Catch } from 'src/app/shared/models/new-fish.model';
+import { Catch } from 'src/app/shared/models/catch.model';
 
 @Injectable({
   providedIn: 'root',

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Equipment } from 'src/app/shared/models/equipment.model';
-import { Catch } from 'src/app/shared/models/new-fish.model';
+import { Catch } from 'src/app/shared/models/catch.model';
 import * as fromCatchActions from '../../core/store/catch/catch.actions';
 import * as fromEquipmentActions from '../../core/store/my-profile/my-profile.actions';
 import * as fromEquipmentSelectors from '../../core/store/my-profile/my-profile.selectors';

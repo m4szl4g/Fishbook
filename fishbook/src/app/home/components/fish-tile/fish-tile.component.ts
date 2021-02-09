@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Catch } from 'src/app/shared/models/new-fish.model';
+import { Catch } from 'src/app/shared/models/catch.model';
 
 @Component({
   selector: 'fish-tile',

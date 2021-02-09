@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Catch } from 'src/app/shared/models/new-fish.model';
+import { Catch } from 'src/app/shared/models/catch.model';
 
 export enum CatchActionsTypes {
   CREATE = '[Catch] Create',

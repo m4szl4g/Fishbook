@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Catch } from 'src/app/shared/models/new-fish.model';
+import { Catch } from 'src/app/shared/models/catch.model';
 import * as fromCatchActions from '../../core/store/catch/catch.actions';
 import * as fromCatchSelectors from '../../core/store/catch/catch.selectors';
 

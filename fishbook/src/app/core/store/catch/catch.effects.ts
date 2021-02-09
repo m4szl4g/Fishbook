@@ -11,7 +11,7 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 import { User } from 'src/app/auth/models/user.model';
-import { Catch } from 'src/app/shared/models/new-fish.model';
+import { Catch } from 'src/app/shared/models/catch.model';
 import { CatchService } from '../../services/catch.service';
 import { StorageService } from '../../services/storage.service';
 import * as authSelectors from '../auth/auth.selectors';
