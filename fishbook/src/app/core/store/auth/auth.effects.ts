@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { defer, Observable, of } from 'rxjs';
+import { defer, Observable, of, pipe } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { User } from 'src/app/auth/models/user.model';
 import { AuthService } from '../../services/auth.service';
@@ -101,6 +101,12 @@ export class AuthEffects {
         catchError((error) => of(new auth.AuthError({ error })))
       )
     )
+  );
+
+  @Effect()
+  loginSuccess$ = this.actions$.pipe(
+    ofType(auth.AuthActionTypes.LOGIN_SUCCESS),
+    map(() => new myProfile.Get())
   );
 
   @Effect()
