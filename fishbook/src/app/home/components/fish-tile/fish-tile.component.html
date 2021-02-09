@@ -1,6 +1,9 @@
 <div class="fish-tile">
   <div class="user">
-    <img class="user__pic avatar" [src]="data.fishType | profilePicture" />
+    <img
+      class="user__pic avatar"
+      src="../../../assets/images/default_profile.png"
+    />
     <span class="user__name">{{ data.userName }}</span>
   </div>
   <img class="fish-tile__pic" [src]="data.filePath" />
@@ -19,6 +22,8 @@
     </div>
   </div>
   <div class="comments">
-    <a><span>comments( data.commentCount }})</span></a>
+    <!-- <a><span>comments( {{ data.commentCount }})</span></a> -->
+    <a><span>comments(6)</span></a>
+    <!--should be comes from backend -->
   </div>
 </div>

@@ -1,9 +1,5 @@
-export interface FishTile {
-  profileImgUrl: string;
-  name: string;
-  fishImgUrl: string;
-  rod: string;
-  reel: string;
-  where: string;
+import { Catch } from './catch.model';
+
+export interface FishTile extends Catch {
   commentCount: number;
 }
