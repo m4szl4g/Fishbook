@@ -19,7 +19,7 @@
         type="file"
         onclick="this.value=null"
         (change)="uploadPhoto($event.target.files)"
-        accept=".jpeg, .png"
+        accept="image/png, image/jpeg"
       />
       <button class="btn btn--success" (click)="fileToUpload.click()">
         Select a photo...
