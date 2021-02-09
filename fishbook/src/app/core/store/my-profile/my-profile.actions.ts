@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { User } from 'src/app/auth/models/user.model';
 import { Equipment } from 'src/app/shared/models/equipment.model';
-import { MyProfile } from '../../shared/models/my-profile.model';
+import { MyProfile } from 'src/app/shared/models/my-profile.model';
 
 export enum MyProfileActionTypes {
   GET = '[MyProfile] GET',

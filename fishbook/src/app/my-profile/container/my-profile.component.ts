@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Equipment } from 'src/app/shared/models/equipment.model';
 import { MyProfile } from '../../shared/models/my-profile.model';
-import * as myProfileActions from '../store/my-profile.actions';
-import * as myProfileSelectors from '../store/my-profile.selectors';
+import * as myProfileActions from '../../core/store/my-profile/my-profile.actions';
+import * as myProfileSelectors from '../../core/store/my-profile/my-profile.selectors';
 
 @Component({
   selector: 'app-my-profile',

@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 import { Equipment } from 'src/app/shared/models/equipment.model';
 import { Catch } from 'src/app/shared/models/new-fish.model';
 import * as fromCatchActions from '../../core/store/catch/catch.actions';
-import * as fromEquipmentActions from '../../my-profile/store/my-profile.actions';
-import * as fromEquipmentSelectors from '../../my-profile/store/my-profile.selectors';
+import * as fromEquipmentActions from '../../core/store/my-profile/my-profile.actions';
+import * as fromEquipmentSelectors from '../../core/store/my-profile/my-profile.selectors';
 
 @Component({
   selector: 'app-new-fish',

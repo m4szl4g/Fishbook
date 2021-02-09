@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { defer, Observable, of } from 'rxjs';
 import { map, switchMap, catchError, tap } from 'rxjs/operators';
 import * as auth from './../store/auth.actions';
-import * as myProfile from './../../my-profile/store/my-profile.actions';
+import * as myProfile from '../../core/store/my-profile/my-profile.actions';
 import { User } from '../models/user.model';
 
 @Injectable()

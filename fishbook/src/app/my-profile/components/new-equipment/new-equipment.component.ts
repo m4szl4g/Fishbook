@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Equipment } from 'src/app/shared/models/equipment.model';
-import * as fromActions from '../../store/my-profile.actions';
+import * as fromActions from '../../../core/store/my-profile/my-profile.actions';
 
 @Component({
   selector: 'app-new-equipment',

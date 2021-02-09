@@ -1,16 +1,16 @@
+import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 import {
+  Action,
+  ActionReducer,
   ActionReducerMap,
   MetaReducer,
-  ActionReducer,
-  Action,
 } from '@ngrx/store';
 import * as fromAuth from '../../auth/store/auth.reducer';
-import * as fromMyProfile from '../../my-profile/store/my-profile.reducer';
 import { AuthState } from '../../auth/store/auth.state';
-import { routerReducer, RouterReducerState } from '@ngrx/router-store';
-import { MyProfileState } from 'src/app/my-profile/store/my-profile.state';
-import { CatchState } from './catch/catch.state';
 import { catchReducer } from './catch/catch.reducer';
+import { CatchState } from './catch/catch.state';
+import * as fromMyProfile from './my-profile/my-profile.reducer';
+import { MyProfileState } from './my-profile/my-profile.state';
 
 export interface AppState {
   auth: AuthState;

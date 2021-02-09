@@ -6,6 +6,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { CatchEffects } from './store/catch/catch.effects';
 import { metaReducers, reducers } from './store/index';
+import { MyProfileEffects } from './store/my-profile/my-profile.effects';
 
 @NgModule({
   declarations: [],
@@ -17,7 +18,7 @@ import { metaReducers, reducers } from './store/index';
       logOnly: !environment.production,
     }),
     EffectsModule.forRoot([]),
-    EffectsModule.forFeature([CatchEffects]),
+    EffectsModule.forFeature([CatchEffects, MyProfileEffects]),
   ],
   providers: [],
   bootstrap: [],

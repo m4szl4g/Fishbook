@@ -1,5 +1,5 @@
 import { Equipment } from 'src/app/shared/models/equipment.model';
-import { MyProfile } from '../../shared/models/my-profile.model';
+import { MyProfile } from 'src/app/shared/models/my-profile.model';
 
 export interface MyProfileState {
   myProfile: MyProfile | null;
