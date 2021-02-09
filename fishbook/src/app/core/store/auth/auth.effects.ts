@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { defer, Observable, of } from 'rxjs';
-import { map, switchMap, catchError, tap } from 'rxjs/operators';
-import * as auth from './../store/auth.actions';
-import * as myProfile from '../../core/store/my-profile/my-profile.actions';
-import { User } from '../models/user.model';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { User } from 'src/app/auth/models/user.model';
+import { AuthService } from '../../services/auth.service';
+import * as myProfile from '../my-profile/my-profile.actions';
+import * as auth from './auth.actions';
 
 @Injectable()
 export class AuthEffects {

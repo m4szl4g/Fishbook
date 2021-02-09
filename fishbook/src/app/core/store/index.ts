@@ -5,8 +5,8 @@ import {
   ActionReducerMap,
   MetaReducer,
 } from '@ngrx/store';
-import * as fromAuth from '../../auth/store/auth.reducer';
-import { AuthState } from '../../auth/store/auth.state';
+import * as fromAuth from './auth/auth.reducer';
+import { AuthState } from './auth/auth.state';
 import { catchReducer } from './catch/catch.reducer';
 import { CatchState } from './catch/catch.state';
 import * as fromMyProfile from './my-profile/my-profile.reducer';

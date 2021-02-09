@@ -3,8 +3,8 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/auth/models/user.model';
 import { AppState } from 'src/app/core/store';
-import * as authActions from '../../../auth/store/auth.actions';
-import * as authSelectors from '../../../auth/store/auth.selectors';
+import * as authSelectors from '../../../core/store/auth//auth.selectors';
+import * as authActions from '../../../core/store/auth/auth.actions';
 
 @Component({
   selector: 'app-menu',

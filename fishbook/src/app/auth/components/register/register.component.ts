@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import * as actions from './../../store/auth.actions';
-import { getError } from '../../store/auth.selectors';
+import * as actions from '../../../core/store/auth/auth.actions';
+import { getError } from '../../../core/store/auth/auth.selectors';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AppState } from 'src/app/core/store';

@@ -12,9 +12,9 @@ import {
 } from 'rxjs/operators';
 import { User } from 'src/app/auth/models/user.model';
 import { Catch } from 'src/app/shared/models/new-fish.model';
-import * as authSelectors from '../../../auth/store/auth.selectors';
 import { CatchService } from '../../services/catch.service';
 import { StorageService } from '../../services/storage.service';
+import * as authSelectors from '../auth/auth.selectors';
 import * as fromCatchActions from './catch.actions';
 
 @Injectable()

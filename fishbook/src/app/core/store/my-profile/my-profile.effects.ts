@@ -14,8 +14,8 @@ import { User } from 'src/app/auth/models/user.model';
 import { EquipmentService } from 'src/app/core/services/equipment.service';
 import { Equipment } from 'src/app/shared/models/equipment.model';
 import { MyProfile } from 'src/app/shared/models/my-profile.model';
-import * as authSelectors from '../../../auth/store/auth.selectors';
 import { MyProfileService } from '../../services/my-profile.service';
+import * as authSelectors from '../auth/auth.selectors';
 import * as myProfileActions from '../my-profile/my-profile.actions';
 
 @Injectable()
