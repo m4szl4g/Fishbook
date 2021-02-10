@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import * as fromState from '../../core/store';
-import { MyProfile } from '../../shared/models/my-profile.model';
+import { MyProfile } from 'src/app/shared/models/my-profile.model';
+import * as fromState from '../../../core/store';
 import * as fromReducers from './my-profile.reducer';
 import * as fromSelectors from './my-profile.selectors';
 
@@ -9,7 +9,10 @@ describe('My Profile Selectors', () => {
   let store: Store<fromState.AppState>;
 
   const johnDoeProfile: MyProfile = {
-    name: 'john_doe',
+    firstName: 'john',
+    lastName: 'doe',
+    aboutMe: '',
+    email: 'john@doe.com',
   };
 
   let currentState = {

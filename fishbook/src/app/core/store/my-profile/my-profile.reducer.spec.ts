@@ -1,7 +1,7 @@
 import * as fromReducer from './my-profile.reducer';
 import * as fromActions from './my-profile.actions';
 import { myProfileInitialState } from './my-profile.state';
-import { MyProfile } from '../../shared/models/my-profile.model';
+import { MyProfile } from 'src/app/shared/models/my-profile.model';
 
 describe('My Profile reducers', () => {
   it('no action should return default state', () => {
@@ -31,7 +31,12 @@ describe('My Profile reducers', () => {
     });
 
     it('Get Success - set my profile data', () => {
-      const myProfile: MyProfile = { name: 'john doe' };
+      const myProfile: MyProfile = {
+        firstName: 'john',
+        lastName: 'doe',
+        aboutMe: '',
+        email: 'john@doe.com',
+      };
       const action = new fromActions.GetSuccess({ myProfile: myProfile });
 
       const state = fromReducer.myProfileReducer(myProfileInitialState, action);

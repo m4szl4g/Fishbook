@@ -1,5 +1,5 @@
 import { User } from 'src/app/auth/models/user.model';
-import { MyProfile } from '../../shared/models/my-profile.model';
+import { MyProfile } from 'src/app/shared/models/my-profile.model';
 import * as fromMyProfileActions from './my-profile.actions';
 
 describe('My Profile Actions', () => {
@@ -14,7 +14,10 @@ describe('My Profile Actions', () => {
 
     it('Invoke Get Success action type with profile info', () => {
       const myProfile: MyProfile = {
-        name: 'john_doe',
+        firstName: 'john',
+        lastName: 'doe',
+        aboutMe: '',
+        email: 'john@doe.com',
       };
       const myProfilePayload = { myProfile: myProfile };
       const action = new fromMyProfileActions.GetSuccess(myProfilePayload);

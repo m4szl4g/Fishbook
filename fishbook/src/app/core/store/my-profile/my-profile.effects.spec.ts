@@ -8,14 +8,14 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { cold, hot } from 'jasmine-marbles';
 import { empty, Observable, of, throwError } from 'rxjs';
 import { User } from 'src/app/auth/models/user.model';
+import { MyProfile } from 'src/app/shared/models/my-profile.model';
 import { environment } from 'src/environments/environment';
-import * as fromAuthSelectors from '../../auth/store/auth.selectors';
-import * as fromAuthState from '../../auth/store/auth.state';
-import { MyProfile } from '../../shared/models/my-profile.model';
-import { MyProfileService } from '../../core/services/my-profile.service';
-import * as fromActions from '../store/my-profile.actions';
-import * as fromEffects from '../store/my-profile.effects';
-import * as fromReducers from '../store/my-profile.reducer';
+import { MyProfileService } from '../../services/my-profile.service';
+import * as fromAuthSelectors from '../auth/auth.selectors';
+import * as fromAuthState from '../auth/auth.state';
+import * as fromActions from '../my-profile/my-profile.actions';
+import * as fromEffects from '../my-profile/my-profile.effects';
+import * as fromReducers from '../my-profile/my-profile.reducer';
 
 export class TestActions extends Actions {
   constructor() {
@@ -70,7 +70,12 @@ describe('My Profile Effets', () => {
 
   describe('get$', () => {
     it('should invoke get success', () => {
-      const myProfile: MyProfile = { name: 'john_doe' };
+      const myProfile: MyProfile = {
+        firstName: 'john',
+        lastName: 'doe',
+        aboutMe: '',
+        email: 'john@doe.com',
+      };
       spyOn(service, 'get').and.returnValue(of(myProfile));
 
       actions$.stream = hot('-a', { a: new fromActions.Get() });

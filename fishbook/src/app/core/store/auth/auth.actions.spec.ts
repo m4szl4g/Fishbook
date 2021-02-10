@@ -1,4 +1,3 @@
-import { User } from '../models/user.model';
 import * as fromAuth from './auth.actions';
 
 describe('Auth Actions', () => {

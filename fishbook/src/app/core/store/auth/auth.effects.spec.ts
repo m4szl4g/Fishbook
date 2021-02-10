@@ -1,11 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { AuthService } from '../../core/services/auth.service';
 import { Actions } from '@ngrx/effects';
 import { empty, Observable, of } from 'rxjs';
-import * as fromEffects from '../store/auth.effects';
-import * as fromActions from '../store/auth.actions';
-import * as fromReducers from '../store/auth.reducer';
-import * as fromMyProfileActions from '../../my-profile/store/my-profile.actions';
+import * as fromEffects from '../auth/auth.effects';
+import * as fromActions from '../auth/auth.actions';
+import * as fromReducers from '../auth/auth.reducer';
+import * as fromMyProfileActions from '../my-profile/my-profile.actions';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { hot, cold } from 'jasmine-marbles';
 import { StoreModule } from '@ngrx/store';
@@ -13,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { RouterTestingModule } from '@angular/router/testing';
 import { throwError } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
 
 export class TestActions extends Actions {
   constructor() {
