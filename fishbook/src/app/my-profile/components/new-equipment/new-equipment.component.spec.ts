@@ -3,7 +3,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromReducers from '../../../core/store';
 import { NewEquipmentComponent } from './new-equipment.component';
 
-describe('ProjectTileComponent', () => {
+describe('NewEquipmentComponent tests', () => {
   let component: NewEquipmentComponent;
   let fixture: ComponentFixture<NewEquipmentComponent>;
 
