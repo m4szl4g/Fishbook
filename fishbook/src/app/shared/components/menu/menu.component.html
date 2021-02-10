@@ -8,8 +8,7 @@
       >My profile</a
     >
     <ng-container *ngIf="user$ | async as user">
-      {{ user.displayName }}
-      <a class="toolbar__link" (click)="logout()">Logout</a>
+      <a class="toolbar__link toolbar__logout" (click)="logout()">Logout</a>
     </ng-container>
   </nav>
 </mat-toolbar>
