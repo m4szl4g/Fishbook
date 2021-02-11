@@ -21,9 +21,7 @@ describe('NewFishComponent tests', () => {
       declarations: [NewFishComponent],
       providers: [{ provide: Store, useValue: storeMock }],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(NewFishComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
