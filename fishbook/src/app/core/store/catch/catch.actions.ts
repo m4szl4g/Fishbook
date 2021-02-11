@@ -7,6 +7,7 @@ export enum CatchActionsTypes {
   CREATE_SUCCESS = '[Catch] Create Success',
 
   UPLOAD_FILE = '[Catch] Upload file',
+  UPLOAD_FILE_SUCCESS = '[Catch] Upload file success',
   UPLOAD_FILE_FAILED = '[Catch] Upload file Failed',
 
   GET_ALL = '[Catch] Get All',
@@ -24,6 +25,12 @@ export class UploadFileFailed implements Action {
   readonly type = CatchActionsTypes.UPLOAD_FILE_FAILED;
 
   constructor(public payload: string) {}
+}
+
+export class UploadFileSuccess implements Action {
+  readonly type = CatchActionsTypes.UPLOAD_FILE_SUCCESS;
+
+  constructor() {}
 }
 
 export class Create implements Action {
@@ -68,6 +75,7 @@ export type CatchActions =
   | CreateSuccess
   | UploadFileFailed
   | UploadFile
+  | UploadFileSuccess
   | GetAllSuccess
   | GetAll
   | GetAllFailed;

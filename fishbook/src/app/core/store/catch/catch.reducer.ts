@@ -35,6 +35,13 @@ export function catchReducer(
       };
     }
 
+    case CatchActionsTypes.UPLOAD_FILE_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }
+
     case CatchActionsTypes.UPLOAD_FILE_FAILED: {
       return {
         ...state,
@@ -55,6 +62,14 @@ export function catchReducer(
         ...state,
         isLoading: false,
         catches: action.payload,
+      };
+    }
+
+    case CatchActionsTypes.GET_ALL_FAILED: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error,
       };
     }
 
