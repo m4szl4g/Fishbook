@@ -7,4 +7,5 @@ export interface Catch {
   userId?: string;
   userName?: string;
   filePath?: string;
+  commentCount?: number;
 }

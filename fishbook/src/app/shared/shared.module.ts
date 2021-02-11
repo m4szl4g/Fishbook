@@ -7,10 +7,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ProfilePicturePipe } from './pipes/profile-picture.pipe';
+import { CommentPipe } from './pipes/comment.pipe';
 
 @NgModule({
-  declarations: [MenuComponent, ProfilePicturePipe],
+  declarations: [MenuComponent, CommentPipe],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -26,7 +26,7 @@ import { ProfilePicturePipe } from './pipes/profile-picture.pipe';
     CommonModule,
     RouterModule,
     BrowserAnimationsModule,
-    ProfilePicturePipe,
+    CommentPipe,
   ],
   providers: [],
   bootstrap: [],
