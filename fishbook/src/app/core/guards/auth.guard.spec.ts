@@ -1,16 +1,13 @@
-import { TestBed } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../services/auth.service';
 import { AuthGuard } from './auth.guard';
 
 describe('AuthGuard test', () => {
   let authGuard: AuthGuard;
-  let router: {
-    navigate: '';
-  };
   let user: firebase.default.User = {
     displayName: 'john',
     email: 'john@doe.com',
@@ -49,33 +46,56 @@ describe('AuthGuard test', () => {
     reauthenticateAndRetrieveDataWithCredential: null,
   };
 
-  let test: AuthService;
-  let autServiceMock: AuthService; //jasmine.createSpyObj({
-  //     getAuthState():
-  //     // getAuthState(): Promise.resolve(user)
-  //   });
+  let authService: AuthService;
+  let router: Router;
 
   beforeEach(() => {
-    // spyOn(autServiceMock, 'getAuthState').and.returnValue(of(user));
-
     TestBed.configureTestingModule({
       imports: [AngularFireModule.initializeApp(environment.firebaseConfig)],
-      providers: [{ provide: Router, useValue: router }],
+      providers: [
+        { provide: Router, useValue: { navigateByUrl: (url: string) => {} } },
+      ],
     }).compileComponents();
 
     authGuard = TestBed.inject(AuthGuard);
-    test = TestBed.inject(AuthService);
+    authService = TestBed.inject(AuthService);
+    router = TestBed.inject(Router);
   });
 
-  it('User is not logged in, navigate to login page', () => {
-    spyOn(test, 'getAuthState').and.returnValue(of(null));
-    // awaitStream()
+  it('User is already authenticated, returns true', async(() => {
+    spyOn(authService, 'getAuthState').and.returnValue(of(user));
+
     authGuard
       .canActivate()
       .toPromise()
       .then((result) => {
-        console.log(result);
         expect(result).toBeTrue();
       });
-  });
+  }));
+
+  it('User is not authenticated, navigate to login page', async(() => {
+    spyOn(authService, 'getAuthState').and.returnValue(of(null));
+    spyOn(router, 'navigateByUrl').withArgs('/login').and.callThrough();
+
+    authGuard
+      .canActivate()
+      .toPromise()
+      .then((result) => {
+        expect(router.navigateByUrl).toHaveBeenCalledWith('/login');
+        expect(result).toBeFalse();
+      });
+  }));
+
+  it('Error while getting user, navigate to login page', async(() => {
+    spyOn(authService, 'getAuthState').and.returnValue(throwError('error!'));
+    spyOn(router, 'navigateByUrl').withArgs('/login').and.callThrough();
+
+    authGuard
+      .canActivate()
+      .toPromise()
+      .then((result) => {
+        expect(router.navigateByUrl).toHaveBeenCalledWith('/login');
+        expect(result).toBeFalse();
+      });
+  }));
 });
