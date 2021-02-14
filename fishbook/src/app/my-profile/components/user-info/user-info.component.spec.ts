@@ -7,7 +7,7 @@ import { UserInfoComponent } from './user-info.component';
 describe('UserInfoComponent tests', () => {
   let component: UserInfoComponent;
   let fixture: ComponentFixture<UserInfoComponent>;
-  let myProfile: MyProfile = {
+  const myProfile: MyProfile = {
     aboutMe: 'I love fishing',
     email: 'john@doe.com',
     firstName: 'john',

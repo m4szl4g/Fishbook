@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Equipment } from 'src/app/shared/models/equipment.model';
 import * as fromActions from '../../../core/store/my-profile/my-profile.actions';
@@ -32,19 +37,19 @@ export class NewEquipmentComponent implements OnInit {
     });
   }
 
-  get name() {
+  get name(): AbstractControl {
     return this.newEquipmentForm.get('name');
   }
 
-  get rod() {
+  get rod(): AbstractControl {
     return this.newEquipmentForm.get('rod');
   }
 
-  get reel() {
+  get reel(): AbstractControl {
     return this.newEquipmentForm.get('reel');
   }
 
-  get line() {
+  get line(): AbstractControl {
     return this.newEquipmentForm.get('line');
   }
 

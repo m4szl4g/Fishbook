@@ -1,16 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Equipment } from 'src/app/shared/models/equipment.model';
-import * as fromReducers from '../../core/store';
-import { NewFishComponent } from './new-fish.component';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { Store } from '@ngrx/store';
-import * as fromCatchActions from '../../core/store/catch/catch.actions';
 import { Catch } from 'src/app/shared/models/catch.model';
+import { Equipment } from 'src/app/shared/models/equipment.model';
+import * as fromCatchActions from '../../core/store/catch/catch.actions';
+import { NewFishComponent } from './new-fish.component';
 
 describe('NewFishComponent tests', () => {
   let component: NewFishComponent;
   let fixture: ComponentFixture<NewFishComponent>;
-  let storeMock = {
+  const storeMock = {
     dispatch: jasmine.createSpy('dispatch'),
     select: jasmine.createSpy('select'),
   };

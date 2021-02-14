@@ -1,4 +1,4 @@
-import { async, TestBed } from '@angular/core/testing';
+import { async, TestBed, waitForAsync } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
@@ -8,7 +8,7 @@ import { AuthGuard } from './auth.guard';
 
 describe('AuthGuard test', () => {
   let authGuard: AuthGuard;
-  let user: firebase.default.User = {
+  const user: firebase.default.User = {
     displayName: 'john',
     email: 'john@doe.com',
     photoURL: 'johnPhotoUrl',
@@ -62,40 +62,49 @@ describe('AuthGuard test', () => {
     router = TestBed.inject(Router);
   });
 
-  it('User is already authenticated, returns true', async(() => {
-    spyOn(authService, 'getAuthState').and.returnValue(of(user));
+  it(
+    'User is already authenticated, returns true',
+    waitForAsync(() => {
+      spyOn(authService, 'getAuthState').and.returnValue(of(user));
 
-    authGuard
-      .canActivate()
-      .toPromise()
-      .then((result) => {
-        expect(result).toBeTrue();
-      });
-  }));
+      authGuard
+        .canActivate()
+        .toPromise()
+        .then((result) => {
+          expect(result).toBeTrue();
+        });
+    })
+  );
 
-  it('User is not authenticated, navigate to login page', async(() => {
-    spyOn(authService, 'getAuthState').and.returnValue(of(null));
-    spyOn(router, 'navigateByUrl').withArgs('/login').and.callThrough();
+  it(
+    'User is not authenticated, navigate to login page',
+    waitForAsync(() => {
+      spyOn(authService, 'getAuthState').and.returnValue(of(null));
+      spyOn(router, 'navigateByUrl').withArgs('/login').and.callThrough();
 
-    authGuard
-      .canActivate()
-      .toPromise()
-      .then((result) => {
-        expect(router.navigateByUrl).toHaveBeenCalledWith('/login');
-        expect(result).toBeFalse();
-      });
-  }));
+      authGuard
+        .canActivate()
+        .toPromise()
+        .then((result) => {
+          expect(router.navigateByUrl).toHaveBeenCalledWith('/login');
+          expect(result).toBeFalse();
+        });
+    })
+  );
 
-  it('Error while getting user, navigate to login page', async(() => {
-    spyOn(authService, 'getAuthState').and.returnValue(throwError('error!'));
-    spyOn(router, 'navigateByUrl').withArgs('/login').and.callThrough();
+  it(
+    'Error while getting user, navigate to login page',
+    waitForAsync(() => {
+      spyOn(authService, 'getAuthState').and.returnValue(throwError('error!'));
+      spyOn(router, 'navigateByUrl').withArgs('/login').and.callThrough();
 
-    authGuard
-      .canActivate()
-      .toPromise()
-      .then((result) => {
-        expect(router.navigateByUrl).toHaveBeenCalledWith('/login');
-        expect(result).toBeFalse();
-      });
-  }));
+      authGuard
+        .canActivate()
+        .toPromise()
+        .then((result) => {
+          expect(router.navigateByUrl).toHaveBeenCalledWith('/login');
+          expect(result).toBeFalse();
+        });
+    })
+  );
 });

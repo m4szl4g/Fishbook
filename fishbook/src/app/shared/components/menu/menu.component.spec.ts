@@ -42,9 +42,9 @@ describe('MenuComponent', () => {
       displayName: 'John',
     };
     component.user$ = of(user);
-    fixture.detectChanges(); //triggers change detection -> observable will emit values
+    fixture.detectChanges(); // triggers change detection -> observable will emit values
 
-    let nameSpan: DebugElement = fixture.debugElement.query(
+    const nameSpan: DebugElement = fixture.debugElement.query(
       By.css('.toolbar__logout')
     );
 

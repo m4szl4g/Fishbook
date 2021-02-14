@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MyProfile } from 'src/app/shared/models/my-profile.model';
 
 @Component({
-  selector: 'user-info',
+  selector: 'app-user-info',
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.sass'],
 })

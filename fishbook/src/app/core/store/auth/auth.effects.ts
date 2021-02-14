@@ -32,10 +32,7 @@ export class AuthEffects {
           return user;
         }),
         switchMap((user: User) => {
-          return [
-            new auth.RegisterSuccess(),
-            new myProfile.Create({ user: user }),
-          ];
+          return [new auth.RegisterSuccess(), new myProfile.Create({ user })];
         }),
         tap(() => {
           this.router.navigateByUrl('');

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as actions from '../../../core/store/auth/auth.actions';
 import { Observable } from 'rxjs';
@@ -40,10 +45,10 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  public get email() {
+  public get email(): AbstractControl {
     return this.loginForm.get('email');
   }
-  public get password() {
+  public get password(): AbstractControl {
     return this.loginForm.get('password');
   }
 

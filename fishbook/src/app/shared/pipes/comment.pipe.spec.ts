@@ -1,7 +1,7 @@
 import { CommentPipe } from './comment.pipe';
 
 describe('CommentPipe tests', () => {
-  let commentPipe: CommentPipe = new CommentPipe();
+  const commentPipe: CommentPipe = new CommentPipe();
 
   it('comment is undefined, returns with no comment text', () => {
     const comment = undefined;

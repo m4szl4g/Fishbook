@@ -24,7 +24,7 @@ export class TestActions extends Actions {
   }
 }
 
-export function getActions() {
+export function getActions(): TestActions {
   return new TestActions();
 }
 

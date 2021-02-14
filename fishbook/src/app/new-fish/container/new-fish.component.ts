@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Equipment } from 'src/app/shared/models/equipment.model';
@@ -35,27 +40,27 @@ export class NewFishComponent implements OnInit {
     });
   }
 
-  get fish() {
+  get fish(): AbstractControl {
     return this.newFishForm.get('fish');
   }
 
-  get where() {
+  get where(): AbstractControl {
     return this.newFishForm.get('where');
   }
 
-  get equipment() {
+  get equipment(): AbstractControl {
     return this.newFishForm.get('equipment');
   }
 
-  get details() {
+  get details(): AbstractControl {
     return this.newFishForm.get('details');
   }
 
-  get fileToUpload() {
+  get fileToUpload(): AbstractControl {
     return this.newFishForm.get('fileToUpload');
   }
 
-  public uploadPhoto(files: File[]) {
+  public uploadPhoto(files: File[]): void {
     this.fileToUpload.setValue(files[0]);
   }
 
