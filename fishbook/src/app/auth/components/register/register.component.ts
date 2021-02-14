@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as actions from '../../../core/store/auth/auth.actions';
 import { getError } from '../../../core/store/auth/auth.selectors';
@@ -44,10 +49,10 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  get email() {
+  get email(): AbstractControl {
     return this.registerForm.get('email');
   }
-  get password() {
+  get password(): AbstractControl {
     return this.registerForm.get('password');
   }
 

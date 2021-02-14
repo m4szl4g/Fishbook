@@ -12,7 +12,7 @@ import { MyProfileEffects } from './store/my-profile/my-profile.effects';
 @NgModule({
   declarations: [],
   imports: [
-    StoreModule.forRoot(reducers, { metaReducers: metaReducers }),
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

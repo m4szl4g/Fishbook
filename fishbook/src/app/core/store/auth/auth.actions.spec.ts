@@ -3,7 +3,7 @@ import * as fromAuth from './auth.actions';
 describe('Auth Actions', () => {
   describe('Login', () => {
     it('Login type called with login', () => {
-      let loginData = { email: 'test@test.com', password: 'Password1' };
+      const loginData = { email: 'test@test.com', password: 'Password1' };
       const action = new fromAuth.Login(loginData);
 
       expect({ ...action }).toEqual({
@@ -15,7 +15,7 @@ describe('Auth Actions', () => {
 
   describe('Login Success', () => {
     it('Login Success called with user data', () => {
-      let user = {
+      const user = {
         user: {
           email: 'test@test.com',
           displayName: 'John Doe',
@@ -85,7 +85,7 @@ describe('Auth Actions', () => {
 
   describe('Register', () => {
     it('Register action type is invoked', () => {
-      let registerData = {
+      const registerData = {
         email: 'test',
         password: 'pass',
       };
@@ -100,10 +100,6 @@ describe('Auth Actions', () => {
 
   describe('Register Success', () => {
     it('Register Success action type is invoked', () => {
-      let registerData = {
-        email: 'test',
-        password: 'pass',
-      };
       const action = new fromAuth.RegisterSuccess();
 
       expect({ ...action }).toEqual({
@@ -114,11 +110,7 @@ describe('Auth Actions', () => {
 
   describe('Register Failed', () => {
     it('Register Failed action type is invoked', () => {
-      let registerData = {
-        email: 'test',
-        password: 'pass',
-      };
-      let errorPayload = { error: 'HTTP 500' };
+      const errorPayload = { error: 'HTTP 500' };
       const action = new fromAuth.RegisterFailed(errorPayload);
 
       expect({ ...action }).toEqual({

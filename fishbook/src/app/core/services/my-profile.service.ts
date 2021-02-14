@@ -20,7 +20,7 @@ export class MyProfileService {
       .snapshotChanges()
       .pipe(
         map((doc) => {
-          let mappedObject: MyProfile = {
+          const mappedObject: MyProfile = {
             firstName: doc.payload.get('firstName'),
             lastName: doc.payload.get('lastName'),
             aboutMe: doc.payload.get('aboutMe'),

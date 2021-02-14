@@ -55,12 +55,12 @@ describe('Auth Effets', () => {
 
   describe('login$', () => {
     it('should invoke login success action', () => {
-      let nameJohn = 'johndoe';
-      let emailJohn = 'john@test.doe';
-      let photoJohn = 'url_john';
-      let idJohn = 'id_john_doe';
+      const nameJohn = 'johndoe';
+      const emailJohn = 'john@test.doe';
+      const photoJohn = 'url_john';
+      const idJohn = 'id_john_doe';
 
-      let userCredential: firebase.default.auth.UserCredential = {
+      const userCredential: firebase.default.auth.UserCredential = {
         credential: {
           providerId: 'prov_id',
           signInMethod: 'userpass',
@@ -125,12 +125,12 @@ describe('Auth Effets', () => {
     });
 
     it('Login - should invoke login failed after authentication failed', () => {
-      let errorMessage = 'Error XYZ';
+      const errorMessage = 'Error XYZ';
       spyOn(service, 'login').and.returnValue(throwError(errorMessage));
-      let loginPayload = { email: 'test@gmail.com', password: 'Pass123' };
+      const loginPayload = { email: 'test@gmail.com', password: 'Pass123' };
       const action = new fromActions.Login(loginPayload);
 
-      let errorPayload = { error: errorMessage };
+      const errorPayload = { error: errorMessage };
       const completion = new fromActions.AuthError(errorPayload);
 
       actions$.stream = hot('-a', { a: action });
@@ -146,7 +146,7 @@ describe('Auth Effets', () => {
         johnEmail = 'john@email.com',
         johnPhotoUrl = 'photo_url',
         johnId = 'ID_John_123';
-      let user: firebase.default.User = {
+      const user: firebase.default.User = {
         displayName: johnName,
         email: johnEmail,
         photoURL: johnPhotoUrl,
@@ -185,7 +185,7 @@ describe('Auth Effets', () => {
       };
       spyOn(service, 'getAuthState').and.returnValue(of(user));
 
-      let payloadLogin = {
+      const payloadLogin = {
         user: {
           uid: johnId,
           displayName: johnName,
@@ -203,11 +203,11 @@ describe('Auth Effets', () => {
     });
 
     it('GetUser - should invoke login failed after authentication failed', () => {
-      let errorMessage = 'Error XYZ';
+      const errorMessage = 'Error XYZ';
       spyOn(service, 'getAuthState').and.returnValue(throwError(errorMessage));
       const action = new fromActions.GetUser();
 
-      let errorPayload = { error: errorMessage };
+      const errorPayload = { error: errorMessage };
       const completion = new fromActions.AuthError(errorPayload);
       actions$.stream = hot('-a', { a: action });
       const expected = cold('-b', { b: completion });
@@ -218,12 +218,12 @@ describe('Auth Effets', () => {
 
   describe('register$', () => {
     it('Register - should invoke register success', () => {
-      let nameJohn = 'johndoe';
-      let emailJohn = 'john@test.doe';
-      let photoJohn = 'url_john';
-      let idJohn = 'id_john_doe';
+      const nameJohn = 'johndoe';
+      const emailJohn = 'john@test.doe';
+      const photoJohn = 'url_john';
+      const idJohn = 'id_john_doe';
 
-      let userCredential: firebase.default.auth.UserCredential = {
+      const userCredential: firebase.default.auth.UserCredential = {
         credential: {
           providerId: 'prov_id',
           signInMethod: 'userpass',
@@ -291,14 +291,14 @@ describe('Auth Effets', () => {
     });
 
     it('Register - should invoke login failed after authentication failed', () => {
-      let errorMessage = 'Error XYZ';
+      const errorMessage = 'Error XYZ';
       spyOn(service, 'register').and.returnValue(throwError(errorMessage));
       const action = new fromActions.Register({
         password: 'pass',
         email: 'mail@gmail.com',
       });
 
-      let errorPayload = { error: errorMessage };
+      const errorPayload = { error: errorMessage };
       const completion = new fromActions.AuthError(errorPayload);
 
       actions$.stream = hot('-a', { a: action });

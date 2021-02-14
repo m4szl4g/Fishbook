@@ -11,7 +11,7 @@ describe('Auth reducers', () => {
   });
 
   it('Auth error - error should be added', () => {
-    let errorPayload = { error: 'error123' };
+    const errorPayload = { error: 'error123' };
     const action = new fromActions.AuthError(errorPayload);
 
     const state = fromReducer.authReducer(authInitialState, action);
@@ -23,7 +23,7 @@ describe('Auth reducers', () => {
 
   describe('Login reducers', () => {
     it('Login - Loading property is true and user is null', () => {
-      let loginData = { email: 'test@test.com', password: 'Test1' };
+      const loginData = { email: 'test@test.com', password: 'Test1' };
       const action = new fromActions.Login(loginData);
 
       const state = fromReducer.authReducer(authInitialState, action);
@@ -33,7 +33,7 @@ describe('Auth reducers', () => {
     });
 
     it('Login Success - Loading is false and user property is filled', () => {
-      let payload = {
+      const payload = {
         user: {
           displayName: 'johndoe',
           email: 'email',
