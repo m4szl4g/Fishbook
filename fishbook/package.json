@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "cypress": "concurrently \"ng serve\" \"cypress open\""
+    "cypress": "concurrently \"ng serve -c uitest\" \"cypress open\""
   },
   "private": true,
   "dependencies": {

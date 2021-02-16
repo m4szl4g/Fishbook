@@ -46,4 +46,5 @@ testem.log
 Thumbs.db
 
 firebase-config.ts
+firebase-config-cypress.ts
 firebase-debug.log

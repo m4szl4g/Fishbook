@@ -60,6 +60,16 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "uitest": {
+
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.uitest.ts"
+                }
+              ],
+              "serviceWorker": true
             }
           }
         },
@@ -71,6 +81,9 @@
           "configurations": {
             "production": {
               "browserTarget": "fishbook:build:production"
+            },
+            "uitest": {
+              "browserTarget": "fishbook:build:uitest"
             }
           }
         },
