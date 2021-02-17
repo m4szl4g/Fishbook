@@ -1,1 +1,19 @@
-{}
+{
+    "testUser": {
+        "uid": "2biOLvmDeMQCwCMOK92QvpNZtxm2",
+        "password": "Password123",
+        "email": "tester@fishbook.com",
+        "firstName": "John",
+        "lastName": "Doe",
+        "aboutMe": "Hi my name is John Doe and I like fishing!",
+    
+        "equipments": [
+            {
+                "name": "My spinning stuff",
+                "rod": "Shimano BeastMaster 270",
+                "reel": "Shimano Ultegra",
+                "line": "Spro Pike 14mm"
+            }
+        ]
+    }
+}
